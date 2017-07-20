@@ -18,9 +18,10 @@ import es.neodoo.vehicle.tesla.invoker.TeslaInvoker;
 
 public class StartHvacSystem {
 
-	private final static Logger log = Logger.getLogger(StartHvacSystem.class.getName());
+	private final static Logger log = Logger
+			.getLogger(StartHvacSystem.class.getName());
 
-	public static final String URL_START_HVAC_SYSTEM ="/command/auto_conditioning_start";
+	public static final String URL_START_HVAC_SYSTEM = "/command/auto_conditioning_start";
 
 	private TeslaInvoker teslaInvoker;
 
@@ -36,7 +37,8 @@ public class StartHvacSystem {
 		this.teslaInvoker = teslaInvoker;
 	}
 
-	public StartHvacSystemResponse execute(int vehicleId) throws OauthInvokerException, TeslaInvokerException{
+	public StartHvacSystemResponse execute(int vehicleId)
+			throws OauthInvokerException, TeslaInvokerException {
 
 		StartHvacSystemResponse startHvacSystemResponse = null;
 
@@ -44,24 +46,34 @@ public class StartHvacSystem {
 
 			String accessToken = teslaInvoker.getAccessToken();
 			Client client = Client.create();
-			WebResource webResource = client.resource(teslaInvoker.getUri() + "/" + TeslaInvoker.URL_PATH_VEHICLES + "/" + vehicleId + URL_START_HVAC_SYSTEM);
+			WebResource webResource = client.resource(
+					teslaInvoker.getUri() + "/" + TeslaInvoker.URL_PATH_VEHICLES
+							+ "/" + vehicleId + URL_START_HVAC_SYSTEM);
 
-			ClientResponse response = webResource.type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-					.header(OauthInvoker.HEADER_AUTHORIZATION, OauthInvoker.HEADER_AUTHORIZATION_BEARER + " " + accessToken).post(ClientResponse.class);
+			ClientResponse response = webResource
+					.type(MediaType.APPLICATION_JSON)
+					.accept(MediaType.APPLICATION_JSON)
+					.header(OauthInvoker.HEADER_AUTHORIZATION,
+							OauthInvoker.HEADER_AUTHORIZATION_BEARER + " "
+									+ accessToken)
+					.post(ClientResponse.class);
 
 			String output = response.getEntity(String.class);
-			startHvacSystemResponse =  StartHvacSystemResponse.toObject(output);
+			startHvacSystemResponse = StartHvacSystemResponse.toObject(output);
 
 		} catch (OauthInvokerException e) {
 			log.log(Level.SEVERE, "Error invoking oauth : " + e.getMessage());
 			throw e;
 		} catch (IOException e) {
-			log.log(Level.SEVERE, "Error invoking Tesla API : " + e.getMessage());
-			throw new TeslaInvokerException("Error invoking start HVAC system service: " + e.getMessage());
+			log.log(Level.SEVERE,
+					"Error invoking Tesla API : " + e.getMessage());
+			throw new TeslaInvokerException(
+					"Error invoking start HVAC system service: "
+							+ e.getMessage());
 		}
 
 		return startHvacSystemResponse;
-	
+
 	}
 
 }

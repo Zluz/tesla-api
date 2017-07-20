@@ -18,7 +18,8 @@ import es.neodoo.vehicle.tesla.invoker.TeslaInvoker;
 
 public class SetValetMode {
 
-	private final static Logger log = Logger.getLogger(SetValetMode.class.getName());
+	private final static Logger log = Logger
+			.getLogger(SetValetMode.class.getName());
 
 	private static final String PARAM_ONOFF = "onoff";
 
@@ -40,7 +41,8 @@ public class SetValetMode {
 		this.teslaInvoker = teslaInvoker;
 	}
 
-	public SetValetModeResponse execute(int vehicleId, boolean on, int pin) throws OauthInvokerException, TeslaInvokerException{
+	public SetValetModeResponse execute(int vehicleId, boolean on, int pin)
+			throws OauthInvokerException, TeslaInvokerException {
 
 		SetValetModeResponse setValetModeResponse = null;
 
@@ -48,25 +50,35 @@ public class SetValetMode {
 
 			String accessToken = teslaInvoker.getAccessToken();
 			Client client = Client.create();
-			WebResource webResource = client.resource(teslaInvoker.getUri() + "/" + TeslaInvoker.URL_PATH_VEHICLES + "/" + vehicleId + URL_SET_VALET_MODE 
-					+ "?" + PARAM_ONOFF + "=" + on + "&" + PARAM_PIN + "=" + pin);
+			WebResource webResource = client.resource(teslaInvoker.getUri()
+					+ "/" + TeslaInvoker.URL_PATH_VEHICLES + "/" + vehicleId
+					+ URL_SET_VALET_MODE + "?" + PARAM_ONOFF + "=" + on + "&"
+					+ PARAM_PIN + "=" + pin);
 
-			ClientResponse response = webResource.type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-					.header(OauthInvoker.HEADER_AUTHORIZATION, OauthInvoker.HEADER_AUTHORIZATION_BEARER + " " + accessToken).post(ClientResponse.class);
+			ClientResponse response = webResource
+					.type(MediaType.APPLICATION_JSON)
+					.accept(MediaType.APPLICATION_JSON)
+					.header(OauthInvoker.HEADER_AUTHORIZATION,
+							OauthInvoker.HEADER_AUTHORIZATION_BEARER + " "
+									+ accessToken)
+					.post(ClientResponse.class);
 
 			String output = response.getEntity(String.class);
-			setValetModeResponse =  SetValetModeResponse.toObject(output);
+			setValetModeResponse = SetValetModeResponse.toObject(output);
 
 		} catch (OauthInvokerException e) {
 			log.log(Level.SEVERE, "Error invoking oauth : " + e.getMessage());
 			throw e;
 		} catch (IOException e) {
-			log.log(Level.SEVERE, "Error invoking Tesla API : " + e.getMessage());
-			throw new TeslaInvokerException("Error invoking climate settings service: " + e.getMessage());
+			log.log(Level.SEVERE,
+					"Error invoking Tesla API : " + e.getMessage());
+			throw new TeslaInvokerException(
+					"Error invoking climate settings service: "
+							+ e.getMessage());
 		}
-		
+
 		return setValetModeResponse;
-	
+
 	}
 
 }

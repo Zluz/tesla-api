@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 
 public class GuiSettingsResponse {
-	
+
 	private GuiSettingsParamResponse response;
 
 	public GuiSettingsParamResponse getResponse() {
@@ -38,32 +38,36 @@ public class GuiSettingsResponse {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		//Object to JSON in String
+		// Object to JSON in String
 		jsonInString = mapper.writeValueAsString(this);
 
 		return jsonInString;
 
 	}
 
-	public static GuiSettingsResponse toObject(String jsonInString) throws JsonParseException, JsonMappingException, IOException {
+	public static GuiSettingsResponse toObject(String jsonInString)
+			throws JsonParseException, JsonMappingException, IOException {
 
 		GuiSettingsResponse guiSettingsResponse;
 
-		//JSON from String to Object
+		// JSON from String to Object
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(Feature.ALLOW_COMMENTS, true);
-		guiSettingsResponse = mapper.readValue(jsonInString, GuiSettingsResponse.class);
+		guiSettingsResponse = mapper.readValue(jsonInString,
+				GuiSettingsResponse.class);
 
 		return guiSettingsResponse;
-	
+
 	}
 
-	public GuiSettingsResponse(){}
-	
-	public GuiSettingsResponse(GuiSettingsParamResponse guiSettingsParamResponse){
-	
-		response=guiSettingsParamResponse;
-	
+	public GuiSettingsResponse() {
+	}
+
+	public GuiSettingsResponse(
+			GuiSettingsParamResponse guiSettingsParamResponse) {
+
+		response = guiSettingsParamResponse;
+
 	}
 
 }

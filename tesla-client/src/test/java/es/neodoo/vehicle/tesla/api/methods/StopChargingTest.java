@@ -13,23 +13,24 @@ public class StopChargingTest {
 
 	@Test
 	public void testParseResponse() {
-		
+
 		try {
-		
-			StopChargingResponse stopChargingResponse =
-					new StopChargingResponse(new ResponseParamVehicleCommands(true, ""));
+
+			StopChargingResponse stopChargingResponse = new StopChargingResponse(
+					new ResponseParamVehicleCommands(true, ""));
 			String stringStopChargingResponse = stopChargingResponse.toJson();
-			StopChargingResponse stopChargingResponseConverted = 
-					StopChargingResponse.toObject(stringStopChargingResponse);
-			assertEquals(stringStopChargingResponse, stopChargingResponseConverted.toJson());
-		
+			StopChargingResponse stopChargingResponseConverted = StopChargingResponse
+					.toObject(stringStopChargingResponse);
+			assertEquals(stringStopChargingResponse,
+					stopChargingResponseConverted.toJson());
+
 		} catch (Exception e) {
 			assertFalse(true);
 		}
 
 	}
 
-	//@Test
+	// @Test
 	public void testStopCharging() {
 
 		String url = "http://localhost:8080/TeslaServer/rest";
@@ -38,17 +39,18 @@ public class StopChargingTest {
 		String clientSecret = "c7257eb71a564034f9419ee651c7d0e5f7aa6bfbd18bafb5c5c033b093bb2fa3";
 		String email = "usuario@gmail.com";
 		String password = "passwordUser123";
-		
+
 		try {
-			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType, clientId, clientSecret, email, password);
+			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType,
+					clientId, clientSecret, email, password);
 			StopCharging stopCharging = new StopCharging(teslaInvoker);
-			StopChargingResponse stopChargingResponse  = stopCharging.execute(1);
+			StopChargingResponse stopChargingResponse = stopCharging.execute(1);
 			assertNotNull(stopChargingResponse);
-		
+
 		} catch (Exception e) {
 			assertFalse(true);
-		}	
-	
+		}
+
 	}
 
 }

@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class SetValetModeResponse {
-	
+
 	private ResponseParamVehicleCommands response;
 
 	public ResponseParamVehicleCommands getResponse() {
@@ -35,32 +35,36 @@ public class SetValetModeResponse {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		//Object to JSON in String
+		// Object to JSON in String
 		jsonInString = mapper.writeValueAsString(this);
 
 		return jsonInString;
 
 	}
 
-	public static SetValetModeResponse toObject(String jsonInString) throws JsonParseException, JsonMappingException, IOException {
+	public static SetValetModeResponse toObject(String jsonInString)
+			throws JsonParseException, JsonMappingException, IOException {
 
 		SetValetModeResponse setValetResponse;
 
-		//JSON from String to Object
+		// JSON from String to Object
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(Feature.ALLOW_COMMENTS, true);
-		setValetResponse = mapper.readValue(jsonInString, SetValetModeResponse.class);
+		setValetResponse = mapper.readValue(jsonInString,
+				SetValetModeResponse.class);
 
 		return setValetResponse;
-	
+
 	}
 
-	public SetValetModeResponse(){}
-	
-	public SetValetModeResponse(ResponseParamVehicleCommands responseParamVehicleCommands){
-	
-		response=responseParamVehicleCommands;
-	
+	public SetValetModeResponse() {
+	}
+
+	public SetValetModeResponse(
+			ResponseParamVehicleCommands responseParamVehicleCommands) {
+
+		response = responseParamVehicleCommands;
+
 	}
 
 }

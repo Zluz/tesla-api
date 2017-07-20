@@ -34,31 +34,35 @@ public class OpenChargePortResponse {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		//Object to JSON in String
+		// Object to JSON in String
 		jsonInString = mapper.writeValueAsString(this);
 
 		return jsonInString;
 
 	}
 
-	public static OpenChargePortResponse toObject(String jsonInString) throws JsonParseException, JsonMappingException, IOException {
+	public static OpenChargePortResponse toObject(String jsonInString)
+			throws JsonParseException, JsonMappingException, IOException {
 
 		OpenChargePortResponse openChargePortResponse;
 
-		//JSON from String to Object
+		// JSON from String to Object
 		ObjectMapper mapper = new ObjectMapper();
-		openChargePortResponse = mapper.readValue(jsonInString, OpenChargePortResponse.class);
+		openChargePortResponse = mapper.readValue(jsonInString,
+				OpenChargePortResponse.class);
 
 		return openChargePortResponse;
 
 	}
 
-	public OpenChargePortResponse(){}
-	
-	public OpenChargePortResponse(ResponseParamVehicleCommands responseParamVehicleCommands){
-	
-		response=responseParamVehicleCommands;
-	
+	public OpenChargePortResponse() {
+	}
+
+	public OpenChargePortResponse(
+			ResponseParamVehicleCommands responseParamVehicleCommands) {
+
+		response = responseParamVehicleCommands;
+
 	}
 
 }

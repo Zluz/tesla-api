@@ -18,13 +18,14 @@ import es.neodoo.vehicle.tesla.invoker.TeslaInvoker;
 
 public class ChargeState {
 
-	private final static Logger log = Logger.getLogger(ChargeState.class.getName());
+	private final static Logger log = Logger
+			.getLogger(ChargeState.class.getName());
 
-	private static final String URL_CHARGE_STATE="/data_request/charge_state";
+	private static final String URL_CHARGE_STATE = "/data_request/charge_state";
 
 	private TeslaInvoker teslaInvoker;
 
-	public ChargeState(TeslaInvoker teslaInvoker){
+	public ChargeState(TeslaInvoker teslaInvoker) {
 		this.teslaInvoker = teslaInvoker;
 	}
 
@@ -36,7 +37,8 @@ public class ChargeState {
 		this.teslaInvoker = teslaInvoker;
 	}
 
-	public ChargeStateResponse execute(int vehicleId) throws OauthInvokerException, TeslaInvokerException {
+	public ChargeStateResponse execute(int vehicleId)
+			throws OauthInvokerException, TeslaInvokerException {
 
 		ChargeStateResponse chargeStateResponse = null;
 
@@ -44,20 +46,29 @@ public class ChargeState {
 
 			String accessToken = teslaInvoker.getAccessToken();
 			Client client = Client.create();
-			WebResource webResource = client.resource(teslaInvoker.getUri() + "/" +TeslaInvoker.URL_PATH_VEHICLES + "/" + vehicleId + URL_CHARGE_STATE);
+			WebResource webResource = client.resource(
+					teslaInvoker.getUri() + "/" + TeslaInvoker.URL_PATH_VEHICLES
+							+ "/" + vehicleId + URL_CHARGE_STATE);
 
-			ClientResponse response = webResource.type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-					.header(OauthInvoker.HEADER_AUTHORIZATION, OauthInvoker.HEADER_AUTHORIZATION_BEARER + " " + accessToken).get(ClientResponse.class);
+			ClientResponse response = webResource
+					.type(MediaType.APPLICATION_JSON)
+					.accept(MediaType.APPLICATION_JSON)
+					.header(OauthInvoker.HEADER_AUTHORIZATION,
+							OauthInvoker.HEADER_AUTHORIZATION_BEARER + " "
+									+ accessToken)
+					.get(ClientResponse.class);
 
 			String output = response.getEntity(String.class);
-			chargeStateResponse =  ChargeStateResponse.toObject(output);
+			chargeStateResponse = ChargeStateResponse.toObject(output);
 
 		} catch (OauthInvokerException e) {
 			log.log(Level.SEVERE, "Error invoking oauth : " + e.getMessage());
 			throw e;
 		} catch (IOException e) {
-			log.log(Level.SEVERE, "Error invoking Tesla API : " + e.getMessage());
-			throw new TeslaInvokerException("Error invoking charge state service: " + e.getMessage());
+			log.log(Level.SEVERE,
+					"Error invoking Tesla API : " + e.getMessage());
+			throw new TeslaInvokerException(
+					"Error invoking charge state service: " + e.getMessage());
 		}
 
 		return chargeStateResponse;

@@ -13,21 +13,24 @@ public class MovePanoRoofTest {
 
 	@Test
 	public void testParseResponse() {
-		
+
 		try {
-		
-			MovePanoRoofResponse  movePanoRoofResponse = new  MovePanoRoofResponse(new ResponseParamVehicleCommands(true, ""));
+
+			MovePanoRoofResponse movePanoRoofResponse = new MovePanoRoofResponse(
+					new ResponseParamVehicleCommands(true, ""));
 			String stringMovePanoRoofResponse = movePanoRoofResponse.toJson();
-			MovePanoRoofResponse movePanoRoofResponseConverted = MovePanoRoofResponse.toObject(stringMovePanoRoofResponse);
-			assertEquals(stringMovePanoRoofResponse, movePanoRoofResponseConverted.toJson());
-		
+			MovePanoRoofResponse movePanoRoofResponseConverted = MovePanoRoofResponse
+					.toObject(stringMovePanoRoofResponse);
+			assertEquals(stringMovePanoRoofResponse,
+					movePanoRoofResponseConverted.toJson());
+
 		} catch (Exception e) {
 			assertFalse(true);
-		}	
-	
+		}
+
 	}
 
-	//@Test
+	// @Test
 	public void testMovePanoRoof() {
 
 		String url = "http://localhost:8080/TeslaServer/rest";
@@ -36,18 +39,20 @@ public class MovePanoRoofTest {
 		String clientSecret = "c7257eb71a564034f9419ee651c7d0e5f7aa6bfbd18bafb5c5c033b093bb2fa3";
 		String email = "usuario@gmail.com";
 		String password = "passwordUser123";
-		
+
 		try {
-			
-			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType, clientId, clientSecret, email, password);
+
+			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType,
+					clientId, clientSecret, email, password);
 			MovePanoRoof movePanoRoof = new MovePanoRoof(teslaInvoker);
-			MovePanoRoofResponse movePanoRoofResponse  = movePanoRoof.execute(1,"open");
+			MovePanoRoofResponse movePanoRoofResponse = movePanoRoof.execute(1,
+					"open");
 			assertNotNull(movePanoRoofResponse);
-		
+
 		} catch (Exception e) {
 			assertFalse(true);
-		}	
-	
+		}
+
 	}
 
 }

@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 
 public class WakeUpCarResponse {
-	
+
 	private ResponseParamVehicleCommands response;
 
 	public ResponseParamVehicleCommands getResponse() {
@@ -35,32 +35,36 @@ public class WakeUpCarResponse {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		//Object to JSON in String
+		// Object to JSON in String
 		jsonInString = mapper.writeValueAsString(this);
 
 		return jsonInString;
 
 	}
 
-	public static WakeUpCarResponse toObject(String jsonInString) throws JsonParseException, JsonMappingException, IOException {
+	public static WakeUpCarResponse toObject(String jsonInString)
+			throws JsonParseException, JsonMappingException, IOException {
 
 		WakeUpCarResponse wakeUpCarResponse;
 
-		//JSON from String to Object
+		// JSON from String to Object
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(Feature.ALLOW_COMMENTS, true);
-		wakeUpCarResponse = mapper.readValue(jsonInString, WakeUpCarResponse.class);
+		wakeUpCarResponse = mapper.readValue(jsonInString,
+				WakeUpCarResponse.class);
 
 		return wakeUpCarResponse;
 
 	}
 
-	public WakeUpCarResponse(){}
-	
-	public WakeUpCarResponse(ResponseParamVehicleCommands responseParamVehicleCommands){
-	
-		response=responseParamVehicleCommands;
-	
+	public WakeUpCarResponse() {
+	}
+
+	public WakeUpCarResponse(
+			ResponseParamVehicleCommands responseParamVehicleCommands) {
+
+		response = responseParamVehicleCommands;
+
 	}
 
 }

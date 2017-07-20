@@ -182,13 +182,19 @@ public class ChargeStateParamResponse {
 		this.time_to_full_charge = time_to_full_charge;
 	}
 
-	public ChargeStateParamResponse(){}
+	public ChargeStateParamResponse() {
+	}
 
-	public ChargeStateParamResponse(String charging_state, Boolean charge_to_max_range, int max_range_charger_counter,
-			Boolean fast_charger_present, double battery_range, double est_battery_range, double ideal_battery_range,
-			int battery_level, double battery_current, String charge_starting_range, String charge_starting_soc,
-			int charger_voltage, int charger_pilot_current, int charger_actual_current, int charger_power,
-			String time_to_full_charge, double charge_rate, Boolean charge_port_door_open) {
+	public ChargeStateParamResponse(String charging_state,
+			Boolean charge_to_max_range, int max_range_charger_counter,
+			Boolean fast_charger_present, double battery_range,
+			double est_battery_range, double ideal_battery_range,
+			int battery_level, double battery_current,
+			String charge_starting_range, String charge_starting_soc,
+			int charger_voltage, int charger_pilot_current,
+			int charger_actual_current, int charger_power,
+			String time_to_full_charge, double charge_rate,
+			Boolean charge_port_door_open) {
 
 		this.charging_state = charging_state;
 		this.charge_to_max_range = charge_to_max_range;
@@ -208,7 +214,7 @@ public class ChargeStateParamResponse {
 		this.time_to_full_charge = time_to_full_charge;
 		this.charge_rate = charge_rate;
 		this.charge_port_door_open = charge_port_door_open;
-	
+
 	}
 
 }

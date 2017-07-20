@@ -18,7 +18,8 @@ import es.neodoo.vehicle.tesla.invoker.TeslaInvoker;
 
 public class GuiSettings {
 
-	private final static Logger log = Logger.getLogger(GuiSettings.class.getName());
+	private final static Logger log = Logger
+			.getLogger(GuiSettings.class.getName());
 
 	public static final String URL_GUI_SETTINGS = "/data_request/gui_settings";
 
@@ -36,31 +37,41 @@ public class GuiSettings {
 		this.teslaInvoker = teslaInvoker;
 	}
 
-	public GuiSettingsResponse execute(int vehicleId) throws OauthInvokerException, TeslaInvokerException {
+	public GuiSettingsResponse execute(int vehicleId)
+			throws OauthInvokerException, TeslaInvokerException {
 
 		GuiSettingsResponse guiSettingsResponse = null;
 
 		try {
 			String accessToken = teslaInvoker.getAccessToken();
 			Client client = Client.create();
-			WebResource webResource = client.resource(teslaInvoker.getUri() + "/" + TeslaInvoker.URL_PATH_VEHICLES + "/" + vehicleId + URL_GUI_SETTINGS);
+			WebResource webResource = client.resource(
+					teslaInvoker.getUri() + "/" + TeslaInvoker.URL_PATH_VEHICLES
+							+ "/" + vehicleId + URL_GUI_SETTINGS);
 
-			ClientResponse response = webResource.type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-					.header(OauthInvoker.HEADER_AUTHORIZATION, OauthInvoker.HEADER_AUTHORIZATION_BEARER + " " + accessToken).get(ClientResponse.class);
+			ClientResponse response = webResource
+					.type(MediaType.APPLICATION_JSON)
+					.accept(MediaType.APPLICATION_JSON)
+					.header(OauthInvoker.HEADER_AUTHORIZATION,
+							OauthInvoker.HEADER_AUTHORIZATION_BEARER + " "
+									+ accessToken)
+					.get(ClientResponse.class);
 
 			String output = response.getEntity(String.class);
-			guiSettingsResponse =  GuiSettingsResponse.toObject(output);
+			guiSettingsResponse = GuiSettingsResponse.toObject(output);
 
 		} catch (OauthInvokerException e) {
 			log.log(Level.SEVERE, "Error invoking oauth : " + e.getMessage());
 			throw e;
 		} catch (IOException e) {
-			log.log(Level.SEVERE, "Error invoking Tesla API : " + e.getMessage());
-			throw new TeslaInvokerException("Error invoking gui settings service: " + e.getMessage());
+			log.log(Level.SEVERE,
+					"Error invoking Tesla API : " + e.getMessage());
+			throw new TeslaInvokerException(
+					"Error invoking gui settings service: " + e.getMessage());
 		}
 
 		return guiSettingsResponse;
-	
+
 	}
 
 }

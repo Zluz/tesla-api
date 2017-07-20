@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class HonkHornResponse {
-	
+
 	private ResponseParamVehicleCommands response;
 
 	public ResponseParamVehicleCommands getResponse() {
@@ -26,32 +26,36 @@ public class HonkHornResponse {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		//Object to JSON in String
+		// Object to JSON in String
 		jsonInString = mapper.writeValueAsString(this);
 
 		return jsonInString;
 
 	}
 
-	public static HonkHornResponse toObject(String jsonInString) throws JsonParseException, JsonMappingException, IOException {
+	public static HonkHornResponse toObject(String jsonInString)
+			throws JsonParseException, JsonMappingException, IOException {
 
 		HonkHornResponse honkHornResponse;
 
-		//JSON from String to Object
+		// JSON from String to Object
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(Feature.ALLOW_COMMENTS, true);
-		honkHornResponse = mapper.readValue(jsonInString, HonkHornResponse.class);
+		honkHornResponse = mapper.readValue(jsonInString,
+				HonkHornResponse.class);
 
 		return honkHornResponse;
-	
+
 	}
 
-	public HonkHornResponse(){}
-	
-	public HonkHornResponse(ResponseParamVehicleCommands responseParamVehicleCommands){
-	
-		response=responseParamVehicleCommands;
-	
+	public HonkHornResponse() {
+	}
+
+	public HonkHornResponse(
+			ResponseParamVehicleCommands responseParamVehicleCommands) {
+
+		response = responseParamVehicleCommands;
+
 	}
 
 }

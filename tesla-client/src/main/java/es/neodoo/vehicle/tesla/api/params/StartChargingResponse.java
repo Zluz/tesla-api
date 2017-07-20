@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class StartChargingResponse {
-	
+
 	private ResponseParamVehicleCommands response;
 
 	public ResponseParamVehicleCommands getResponse() {
@@ -26,32 +26,36 @@ public class StartChargingResponse {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		//Object to JSON in String
+		// Object to JSON in String
 		jsonInString = mapper.writeValueAsString(this);
 
 		return jsonInString;
 
 	}
 
-	public static StartChargingResponse toObject(String jsonInString) throws JsonParseException, JsonMappingException, IOException {
+	public static StartChargingResponse toObject(String jsonInString)
+			throws JsonParseException, JsonMappingException, IOException {
 
 		StartChargingResponse startChargingResponse;
 
-		//JSON from String to Object
+		// JSON from String to Object
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(Feature.ALLOW_COMMENTS, true);
-		startChargingResponse = mapper.readValue(jsonInString, StartChargingResponse.class);
+		startChargingResponse = mapper.readValue(jsonInString,
+				StartChargingResponse.class);
 
 		return startChargingResponse;
 
 	}
 
-	public StartChargingResponse(){}
-	
-	public StartChargingResponse(ResponseParamVehicleCommands responseParamVehicleCommands){
-	
-		response=responseParamVehicleCommands;
-	
+	public StartChargingResponse() {
+	}
+
+	public StartChargingResponse(
+			ResponseParamVehicleCommands responseParamVehicleCommands) {
+
+		response = responseParamVehicleCommands;
+
 	}
 
 }

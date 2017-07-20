@@ -18,7 +18,8 @@ import es.neodoo.vehicle.tesla.invoker.TeslaInvoker;
 
 public class ResetValetPin {
 
-	private final static Logger log = Logger.getLogger(ResetValetPin.class.getName());
+	private final static Logger log = Logger
+			.getLogger(ResetValetPin.class.getName());
 
 	public static final String URL_RESET_VALET_PIN = "/command/reset_valet_pin";
 
@@ -35,8 +36,9 @@ public class ResetValetPin {
 	public void setTeslaInvoker(TeslaInvoker teslaInvoker) {
 		this.teslaInvoker = teslaInvoker;
 	}
-	
-	public ResetValetPinResponse execute(int vehicleId) throws OauthInvokerException, TeslaInvokerException {
+
+	public ResetValetPinResponse execute(int vehicleId)
+			throws OauthInvokerException, TeslaInvokerException {
 
 		ResetValetPinResponse resetValetPinResponse = null;
 
@@ -44,23 +46,32 @@ public class ResetValetPin {
 
 			String accessToken = teslaInvoker.getAccessToken();
 			Client client = Client.create();
-			WebResource webResource= client
-					.resource(teslaInvoker.getUri() + "/" + TeslaInvoker.URL_PATH_VEHICLES + "/" + vehicleId + URL_RESET_VALET_PIN);
+			WebResource webResource = client.resource(
+					teslaInvoker.getUri() + "/" + TeslaInvoker.URL_PATH_VEHICLES
+							+ "/" + vehicleId + URL_RESET_VALET_PIN);
 
-			ClientResponse response = webResource.type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-					.header(OauthInvoker.HEADER_AUTHORIZATION, OauthInvoker.HEADER_AUTHORIZATION_BEARER + " " + accessToken).post(ClientResponse.class);
+			ClientResponse response = webResource
+					.type(MediaType.APPLICATION_JSON)
+					.accept(MediaType.APPLICATION_JSON)
+					.header(OauthInvoker.HEADER_AUTHORIZATION,
+							OauthInvoker.HEADER_AUTHORIZATION_BEARER + " "
+									+ accessToken)
+					.post(ClientResponse.class);
 
 			String output = response.getEntity(String.class);
-			resetValetPinResponse =  ResetValetPinResponse.toObject(output);
+			resetValetPinResponse = ResetValetPinResponse.toObject(output);
 
 		} catch (OauthInvokerException e) {
 			log.log(Level.SEVERE, "Error invoking oauth : " + e.getMessage());
 			throw e;
 		} catch (IOException e) {
-			log.log(Level.SEVERE, "Error invoking Tesla API : " + e.getMessage());
-			throw new TeslaInvokerException("Error invoking reset valet mode service: " + e.getMessage());
+			log.log(Level.SEVERE,
+					"Error invoking Tesla API : " + e.getMessage());
+			throw new TeslaInvokerException(
+					"Error invoking reset valet mode service: "
+							+ e.getMessage());
 		}
-		
+
 		return resetValetPinResponse;
 
 	}

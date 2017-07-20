@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class SetTemperatureResponse {
-	
+
 	private ResponseParamVehicleCommands response;
 
 	public ResponseParamVehicleCommands getResponse() {
@@ -26,32 +26,36 @@ public class SetTemperatureResponse {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		//Object to JSON in String
+		// Object to JSON in String
 		jsonInString = mapper.writeValueAsString(this);
 
 		return jsonInString;
 
 	}
 
-	public static SetTemperatureResponse toObject(String jsonInString) throws JsonParseException, JsonMappingException, IOException {
+	public static SetTemperatureResponse toObject(String jsonInString)
+			throws JsonParseException, JsonMappingException, IOException {
 
 		SetTemperatureResponse setTemperatureResponse;
 
-		//JSON from String to Object
+		// JSON from String to Object
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(Feature.ALLOW_COMMENTS, true);
-		setTemperatureResponse = mapper.readValue(jsonInString, SetTemperatureResponse.class);
+		setTemperatureResponse = mapper.readValue(jsonInString,
+				SetTemperatureResponse.class);
 
 		return setTemperatureResponse;
 
 	}
 
-	public SetTemperatureResponse(){}
-	
-	public SetTemperatureResponse(ResponseParamVehicleCommands responseParamVehicleCommands){
-	
-		response=responseParamVehicleCommands;
-	
+	public SetTemperatureResponse() {
+	}
+
+	public SetTemperatureResponse(
+			ResponseParamVehicleCommands responseParamVehicleCommands) {
+
+		response = responseParamVehicleCommands;
+
 	}
 
 }

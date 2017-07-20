@@ -18,9 +18,10 @@ import es.neodoo.vehicle.tesla.invoker.TeslaInvoker;
 
 public class SetChargeLimitToStandard {
 
-	private final static Logger log = Logger.getLogger(SetChargeLimitToStandard.class.getName());
+	private final static Logger log = Logger
+			.getLogger(SetChargeLimitToStandard.class.getName());
 
-	public static final String URL_SET_CHARGE_LIMIT_TO_STANDARD ="/command/charge_standard";
+	public static final String URL_SET_CHARGE_LIMIT_TO_STANDARD = "/command/charge_standard";
 
 	private TeslaInvoker teslaInvoker;
 
@@ -36,7 +37,8 @@ public class SetChargeLimitToStandard {
 		this.teslaInvoker = teslaInvoker;
 	}
 
-	public SetChargeLimitToStandardResponse execute(int vehicleId) throws OauthInvokerException, TeslaInvokerException{
+	public SetChargeLimitToStandardResponse execute(int vehicleId)
+			throws OauthInvokerException, TeslaInvokerException {
 
 		SetChargeLimitToStandardResponse setChargeLimitToStandardResponse = null;
 
@@ -44,25 +46,35 @@ public class SetChargeLimitToStandard {
 
 			String accessToken = teslaInvoker.getAccessToken();
 			Client client = Client.create();
-			WebResource webResource= client
-					.resource(teslaInvoker.getUri() + "/" + TeslaInvoker.URL_PATH_VEHICLES + "/" + vehicleId + URL_SET_CHARGE_LIMIT_TO_STANDARD);
+			WebResource webResource = client.resource(teslaInvoker.getUri()
+					+ "/" + TeslaInvoker.URL_PATH_VEHICLES + "/" + vehicleId
+					+ URL_SET_CHARGE_LIMIT_TO_STANDARD);
 
-			ClientResponse response = webResource.type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-					.header(OauthInvoker.HEADER_AUTHORIZATION, OauthInvoker.HEADER_AUTHORIZATION_BEARER + " " + accessToken).post(ClientResponse.class);
+			ClientResponse response = webResource
+					.type(MediaType.APPLICATION_JSON)
+					.accept(MediaType.APPLICATION_JSON)
+					.header(OauthInvoker.HEADER_AUTHORIZATION,
+							OauthInvoker.HEADER_AUTHORIZATION_BEARER + " "
+									+ accessToken)
+					.post(ClientResponse.class);
 
 			String output = response.getEntity(String.class);
-			setChargeLimitToStandardResponse =  SetChargeLimitToStandardResponse.toObject(output);
+			setChargeLimitToStandardResponse = SetChargeLimitToStandardResponse
+					.toObject(output);
 
 		} catch (OauthInvokerException e) {
 			log.log(Level.SEVERE, "Error invoking oauth : " + e.getMessage());
 			throw e;
 		} catch (IOException e) {
-			log.log(Level.SEVERE, "Error invoking Tesla API : " + e.getMessage());
-			throw new TeslaInvokerException("Error invoking set charge to standard range service: " + e.getMessage());
+			log.log(Level.SEVERE,
+					"Error invoking Tesla API : " + e.getMessage());
+			throw new TeslaInvokerException(
+					"Error invoking set charge to standard range service: "
+							+ e.getMessage());
 		}
-		
+
 		return setChargeLimitToStandardResponse;
-	
+
 	}
 
 }

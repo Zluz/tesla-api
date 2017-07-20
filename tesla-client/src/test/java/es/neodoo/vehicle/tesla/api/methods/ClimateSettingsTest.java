@@ -17,20 +17,25 @@ public class ClimateSettingsTest {
 
 		try {
 
-			ClimateSettingsResponse climateSettingsResponse = new ClimateSettingsResponse(new ClimateSettingsParamResponse(17.0, 9.5, 22.6, 22.6, false, null, false, 0));
-			String stringClimateSettingsResponse = climateSettingsResponse.toJson();
-			ClimateSettingsResponse climateSettingsResponseConverted = ClimateSettingsResponse.toObject(stringClimateSettingsResponse);
-			Assert.assertEquals(stringClimateSettingsResponse, climateSettingsResponseConverted.toJson());
-		
+			ClimateSettingsResponse climateSettingsResponse = new ClimateSettingsResponse(
+					new ClimateSettingsParamResponse(17.0, 9.5, 22.6, 22.6,
+							false, null, false, 0));
+			String stringClimateSettingsResponse = climateSettingsResponse
+					.toJson();
+			ClimateSettingsResponse climateSettingsResponseConverted = ClimateSettingsResponse
+					.toObject(stringClimateSettingsResponse);
+			Assert.assertEquals(stringClimateSettingsResponse,
+					climateSettingsResponseConverted.toJson());
+
 		} catch (Exception e) {
 			assertFalse(true);
 		}
 
 	}
 
-	//@Test
-	public void testClimateSettings(){
-		
+	// @Test
+	public void testClimateSettings() {
+
 		String url = "http://localhost:8080/TeslaServer/rest";
 		String grantType = "password";
 		String clientId = "81527cff06843c8634fdc09e8ac0abefb46ac849f38fe1e431c2ef2106796384";
@@ -39,16 +44,18 @@ public class ClimateSettingsTest {
 		String password = "passwordUser123";
 
 		try {
-			
-			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType, clientId, clientSecret, email, password);
+
+			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType,
+					clientId, clientSecret, email, password);
 			ClimateSettings climateSettings = new ClimateSettings(teslaInvoker);
-			ClimateSettingsResponse climateSettingsResponse  = climateSettings.execute(1);
+			ClimateSettingsResponse climateSettingsResponse = climateSettings
+					.execute(1);
 			assertNotNull(climateSettingsResponse);
-			
+
 		} catch (Exception e) {
 			assertFalse(true);
-		}	
-	
+		}
+
 	}
 
 }

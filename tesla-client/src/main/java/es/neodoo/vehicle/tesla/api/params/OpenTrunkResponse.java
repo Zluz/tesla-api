@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class OpenTrunkResponse {
-	
+
 	private ResponseParamVehicleCommands response;
 
 	public ResponseParamVehicleCommands getResponse() {
@@ -26,32 +26,36 @@ public class OpenTrunkResponse {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		//Object to JSON in String
+		// Object to JSON in String
 		jsonInString = mapper.writeValueAsString(this);
 
 		return jsonInString;
 
 	}
 
-	public static OpenTrunkResponse toObject(String jsonInString) throws JsonParseException, JsonMappingException, IOException {
+	public static OpenTrunkResponse toObject(String jsonInString)
+			throws JsonParseException, JsonMappingException, IOException {
 
 		OpenTrunkResponse openTrunkResponse;
 
-		//JSON from String to Object
+		// JSON from String to Object
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(Feature.ALLOW_COMMENTS, true);
-		openTrunkResponse = mapper.readValue(jsonInString, OpenTrunkResponse.class);
+		openTrunkResponse = mapper.readValue(jsonInString,
+				OpenTrunkResponse.class);
 
 		return openTrunkResponse;
 
 	}
 
-	public OpenTrunkResponse(){}
-	
-	public OpenTrunkResponse(ResponseParamVehicleCommands responseParamVehicleCommands){
-	
-		response=responseParamVehicleCommands;
-	
+	public OpenTrunkResponse() {
+	}
+
+	public OpenTrunkResponse(
+			ResponseParamVehicleCommands responseParamVehicleCommands) {
+
+		response = responseParamVehicleCommands;
+
 	}
 
 }

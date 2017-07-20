@@ -26,32 +26,36 @@ public class StopChargingResponse {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		//Object to JSON in String
+		// Object to JSON in String
 		jsonInString = mapper.writeValueAsString(this);
 
 		return jsonInString;
 
 	}
 
-	public static StopChargingResponse toObject(String jsonInString) throws JsonParseException, JsonMappingException, IOException {
+	public static StopChargingResponse toObject(String jsonInString)
+			throws JsonParseException, JsonMappingException, IOException {
 
 		StopChargingResponse stopChargingResponse;
 
-		//JSON from String to Object
+		// JSON from String to Object
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(Feature.ALLOW_COMMENTS, true);
-		stopChargingResponse = mapper.readValue(jsonInString, StopChargingResponse.class);
+		stopChargingResponse = mapper.readValue(jsonInString,
+				StopChargingResponse.class);
 
 		return stopChargingResponse;
-	
+
 	}
 
-	public StopChargingResponse(){}
-	
-	public StopChargingResponse(ResponseParamVehicleCommands responseParamVehicleCommands){
-	
-		response=responseParamVehicleCommands;
-	
+	public StopChargingResponse() {
+	}
+
+	public StopChargingResponse(
+			ResponseParamVehicleCommands responseParamVehicleCommands) {
+
+		response = responseParamVehicleCommands;
+
 	}
 
 }

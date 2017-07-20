@@ -65,18 +65,19 @@ public class OauthResponse {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		//Object to JSON in String
+		// Object to JSON in String
 		jsonInString = mapper.writeValueAsString(this);
 
 		return jsonInString;
 
 	}
 
-	public static OauthResponse toObject(String jsonInString) throws JsonParseException, JsonMappingException, IOException {
+	public static OauthResponse toObject(String jsonInString)
+			throws JsonParseException, JsonMappingException, IOException {
 
 		OauthResponse oauthResponse = null;
 
-		//JSON from String to Object
+		// JSON from String to Object
 		ObjectMapper mapper = new ObjectMapper();
 		oauthResponse = mapper.readValue(jsonInString, OauthResponse.class);
 
@@ -84,6 +85,7 @@ public class OauthResponse {
 
 	}
 
-	public OauthResponse(){}
+	public OauthResponse() {
+	}
 
 }

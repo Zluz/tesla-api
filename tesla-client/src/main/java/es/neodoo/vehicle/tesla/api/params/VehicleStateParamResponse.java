@@ -162,12 +162,14 @@ public class VehicleStateParamResponse {
 		this.perf_config = perf_config;
 	}
 
-	public VehicleStateParamResponse(){}
+	public VehicleStateParamResponse() {
+	}
 
-	public VehicleStateParamResponse(Boolean df, Boolean dr, Boolean pf, Boolean pr, Boolean ft, Boolean rt,
-			String car_verson, Boolean locked, Boolean sun_roof_installed, String sun_roof_state,
-			int sun_roof_percent_open, Boolean dark_rims, String wheel_type, Boolean has_spoiler, String roof_color,
-			String perf_config) {
+	public VehicleStateParamResponse(Boolean df, Boolean dr, Boolean pf,
+			Boolean pr, Boolean ft, Boolean rt, String car_verson,
+			Boolean locked, Boolean sun_roof_installed, String sun_roof_state,
+			int sun_roof_percent_open, Boolean dark_rims, String wheel_type,
+			Boolean has_spoiler, String roof_color, String perf_config) {
 
 		super();
 		this.df = df;
@@ -187,6 +189,6 @@ public class VehicleStateParamResponse {
 		this.roof_color = roof_color;
 		this.perf_config = perf_config;
 
-	}	
+	}
 
 }

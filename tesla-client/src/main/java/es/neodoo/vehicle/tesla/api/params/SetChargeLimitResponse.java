@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 
 public class SetChargeLimitResponse {
-	
+
 	private ResponseParamVehicleCommands response;
 
 	public ResponseParamVehicleCommands getResponse() {
@@ -35,32 +35,36 @@ public class SetChargeLimitResponse {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		//Object to JSON in String
+		// Object to JSON in String
 		jsonInString = mapper.writeValueAsString(this);
 
 		return jsonInString;
 
 	}
 
-	public static SetChargeLimitResponse toObject(String jsonInString) throws JsonParseException, JsonMappingException, IOException {
+	public static SetChargeLimitResponse toObject(String jsonInString)
+			throws JsonParseException, JsonMappingException, IOException {
 
 		SetChargeLimitResponse setChargeLimitResponse;
 
-		//JSON from String to Object
+		// JSON from String to Object
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(Feature.ALLOW_COMMENTS, true);
-		setChargeLimitResponse = mapper.readValue(jsonInString, SetChargeLimitResponse.class);
+		setChargeLimitResponse = mapper.readValue(jsonInString,
+				SetChargeLimitResponse.class);
 
 		return setChargeLimitResponse;
-	
+
 	}
 
-	public SetChargeLimitResponse(){}
-	
-	public SetChargeLimitResponse(ResponseParamVehicleCommands responseParamVehicleCommands){
-	
-		response=responseParamVehicleCommands;
-	
+	public SetChargeLimitResponse() {
+	}
+
+	public SetChargeLimitResponse(
+			ResponseParamVehicleCommands responseParamVehicleCommands) {
+
+		response = responseParamVehicleCommands;
+
 	}
 
 }

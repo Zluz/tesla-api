@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class MovePanoRoofResponse {
-	
+
 	private ResponseParamVehicleCommands response;
 
 	public ResponseParamVehicleCommands getResponse() {
@@ -26,32 +26,36 @@ public class MovePanoRoofResponse {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		//Object to JSON in String
+		// Object to JSON in String
 		jsonInString = mapper.writeValueAsString(this);
 
 		return jsonInString;
 
 	}
 
-	public static MovePanoRoofResponse toObject(String jsonInString) throws JsonParseException, JsonMappingException, IOException {
+	public static MovePanoRoofResponse toObject(String jsonInString)
+			throws JsonParseException, JsonMappingException, IOException {
 
 		MovePanoRoofResponse movePanoRoofResponse;
 
-		//JSON from String to Object
+		// JSON from String to Object
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(Feature.ALLOW_COMMENTS, true);
-		movePanoRoofResponse = mapper.readValue(jsonInString, MovePanoRoofResponse.class);
+		movePanoRoofResponse = mapper.readValue(jsonInString,
+				MovePanoRoofResponse.class);
 
 		return movePanoRoofResponse;
 
 	}
 
-	public MovePanoRoofResponse(){}
-	
-	public MovePanoRoofResponse(ResponseParamVehicleCommands responseParamVehicleCommands){
+	public MovePanoRoofResponse() {
+	}
 
-		response=responseParamVehicleCommands;
-	
+	public MovePanoRoofResponse(
+			ResponseParamVehicleCommands responseParamVehicleCommands) {
+
+		response = responseParamVehicleCommands;
+
 	}
 
 }

@@ -18,7 +18,8 @@ import es.neodoo.vehicle.tesla.invoker.TeslaInvoker;
 
 public class MobileAcces {
 
-	private final static Logger log = Logger.getLogger(MobileAcces.class.getName());
+	private final static Logger log = Logger
+			.getLogger(MobileAcces.class.getName());
 
 	public static final String URL_MOBILE_ACCESS = "/mobile_enabled";
 
@@ -36,7 +37,8 @@ public class MobileAcces {
 		this.teslaInvoker = teslaInvoker;
 	}
 
-	public MobileAccesResponse execute(int vehicleId) throws OauthInvokerException , TeslaInvokerException{
+	public MobileAccesResponse execute(int vehicleId)
+			throws OauthInvokerException, TeslaInvokerException {
 
 		MobileAccesResponse mobileAccesResponse = null;
 
@@ -44,24 +46,33 @@ public class MobileAcces {
 
 			String accessToken = teslaInvoker.getAccessToken();
 			Client client = Client.create();
-			WebResource webResource = client.resource(teslaInvoker.getUri() + "/" + TeslaInvoker.URL_PATH_VEHICLES + "/" + vehicleId + URL_MOBILE_ACCESS);	
-			
-			ClientResponse response = webResource.type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-					.header(OauthInvoker.HEADER_AUTHORIZATION, OauthInvoker.HEADER_AUTHORIZATION_BEARER + " " + accessToken).get(ClientResponse.class);
+			WebResource webResource = client.resource(
+					teslaInvoker.getUri() + "/" + TeslaInvoker.URL_PATH_VEHICLES
+							+ "/" + vehicleId + URL_MOBILE_ACCESS);
+
+			ClientResponse response = webResource
+					.type(MediaType.APPLICATION_JSON)
+					.accept(MediaType.APPLICATION_JSON)
+					.header(OauthInvoker.HEADER_AUTHORIZATION,
+							OauthInvoker.HEADER_AUTHORIZATION_BEARER + " "
+									+ accessToken)
+					.get(ClientResponse.class);
 
 			String output = response.getEntity(String.class);
-			mobileAccesResponse =  MobileAccesResponse.toObject(output);
+			mobileAccesResponse = MobileAccesResponse.toObject(output);
 
 		} catch (OauthInvokerException e) {
 			log.log(Level.SEVERE, "Error oauth : " + e.getMessage());
 			throw e;
 		} catch (IOException e) {
-			log.log(Level.SEVERE, "Error invoking Tesla API : " + e.getMessage());
-			throw new TeslaInvokerException("Error invoking mobile acces service: " + e.getMessage());
+			log.log(Level.SEVERE,
+					"Error invoking Tesla API : " + e.getMessage());
+			throw new TeslaInvokerException(
+					"Error invoking mobile acces service: " + e.getMessage());
 		}
-		
+
 		return mobileAccesResponse;
-	
+
 	}
 
 }

@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class UnlockDoorsResponse {
-	
+
 	private ResponseParamVehicleCommands response;
 
 	public ResponseParamVehicleCommands getResponse() {
@@ -26,32 +26,36 @@ public class UnlockDoorsResponse {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		//Object to JSON in String
+		// Object to JSON in String
 		jsonInString = mapper.writeValueAsString(this);
 
 		return jsonInString;
 
 	}
 
-	public static UnlockDoorsResponse toObject(String jsonInString) throws JsonParseException, JsonMappingException, IOException {
+	public static UnlockDoorsResponse toObject(String jsonInString)
+			throws JsonParseException, JsonMappingException, IOException {
 
 		UnlockDoorsResponse unlockDoorsResponse;
 
-		//JSON from String to Object
+		// JSON from String to Object
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(Feature.ALLOW_COMMENTS, true);
-		unlockDoorsResponse = mapper.readValue(jsonInString, UnlockDoorsResponse.class);
+		unlockDoorsResponse = mapper.readValue(jsonInString,
+				UnlockDoorsResponse.class);
 
 		return unlockDoorsResponse;
 
 	}
 
-	public UnlockDoorsResponse(){}
-	
-	public UnlockDoorsResponse(ResponseParamVehicleCommands responseParamVehicleCommands){
-	
-		response=responseParamVehicleCommands;
-	
+	public UnlockDoorsResponse() {
+	}
+
+	public UnlockDoorsResponse(
+			ResponseParamVehicleCommands responseParamVehicleCommands) {
+
+		response = responseParamVehicleCommands;
+
 	}
 
 }

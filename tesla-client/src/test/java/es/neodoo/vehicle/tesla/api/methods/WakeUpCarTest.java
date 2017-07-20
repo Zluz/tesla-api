@@ -15,19 +15,22 @@ public class WakeUpCarTest {
 	public void testParseResponse() {
 
 		try {
-		
-			WakeUpCarResponse wakeUpCarResponse = new WakeUpCarResponse(new ResponseParamVehicleCommands(true, ""));
+
+			WakeUpCarResponse wakeUpCarResponse = new WakeUpCarResponse(
+					new ResponseParamVehicleCommands(true, ""));
 			String stringWakeUpCarResponse = wakeUpCarResponse.toJson();
-			WakeUpCarResponse wakeUpCarResponseConverted = WakeUpCarResponse.toObject(stringWakeUpCarResponse);
-			assertEquals(stringWakeUpCarResponse, wakeUpCarResponseConverted.toJson());
-		
+			WakeUpCarResponse wakeUpCarResponseConverted = WakeUpCarResponse
+					.toObject(stringWakeUpCarResponse);
+			assertEquals(stringWakeUpCarResponse,
+					wakeUpCarResponseConverted.toJson());
+
 		} catch (Exception e) {
 			assertFalse(true);
 		}
 
 	}
-	
-	//@Test
+
+	// @Test
 	public void testWakeUpCar() {
 
 		String url = "http://localhost:8080/TeslaServer/rest";
@@ -36,18 +39,19 @@ public class WakeUpCarTest {
 		String clientSecret = "c7257eb71a564034f9419ee651c7d0e5f7aa6bfbd18bafb5c5c033b093bb2fa3";
 		String email = "usuario@gmail.com";
 		String password = "passwordUser123";
-		
+
 		try {
-		
-			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType, clientId, clientSecret, email, password);
+
+			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType,
+					clientId, clientSecret, email, password);
 			WakeUpCar wakeUpCar = new WakeUpCar(teslaInvoker);
-			WakeUpCarResponse wakeUpCarResponse  = wakeUpCar.execute(1);
+			WakeUpCarResponse wakeUpCarResponse = wakeUpCar.execute(1);
 			assertNotNull(wakeUpCarResponse);
-		
+
 		} catch (Exception e) {
 			assertFalse(true);
-		}	
-	
+		}
+
 	}
 
 }

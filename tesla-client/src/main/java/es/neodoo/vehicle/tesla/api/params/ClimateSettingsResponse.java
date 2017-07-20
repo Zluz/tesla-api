@@ -40,32 +40,36 @@ public class ClimateSettingsResponse {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		//Object to JSON in String
+		// Object to JSON in String
 		jsonInString = mapper.writeValueAsString(this);
 
 		return jsonInString;
 
 	}
 
-	public static ClimateSettingsResponse toObject(String jsonInString) throws JsonParseException, JsonMappingException, IOException {
+	public static ClimateSettingsResponse toObject(String jsonInString)
+			throws JsonParseException, JsonMappingException, IOException {
 
 		ClimateSettingsResponse climateSettingsResponse;
 
-		//JSON from String to Object
+		// JSON from String to Object
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(Feature.ALLOW_COMMENTS, true);
-		climateSettingsResponse = mapper.readValue(jsonInString, ClimateSettingsResponse.class);
+		climateSettingsResponse = mapper.readValue(jsonInString,
+				ClimateSettingsResponse.class);
 
 		return climateSettingsResponse;
-		
+
 	}
 
-	public ClimateSettingsResponse(){}
-	
-	public ClimateSettingsResponse(ClimateSettingsParamResponse climateSettingsParamResponse){
-		
-		response=climateSettingsParamResponse;
-	
+	public ClimateSettingsResponse() {
+	}
+
+	public ClimateSettingsResponse(
+			ClimateSettingsParamResponse climateSettingsParamResponse) {
+
+		response = climateSettingsParamResponse;
+
 	}
 
 }

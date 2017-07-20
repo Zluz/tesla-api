@@ -26,31 +26,35 @@ public class StopHvacSystemResponse {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		//Object to JSON in String
+		// Object to JSON in String
 		jsonInString = mapper.writeValueAsString(this);
 
 		return jsonInString;
 
 	}
 
-	public static StopHvacSystemResponse toObject(String jsonInString) throws JsonParseException, JsonMappingException, IOException {
+	public static StopHvacSystemResponse toObject(String jsonInString)
+			throws JsonParseException, JsonMappingException, IOException {
 
 		StopHvacSystemResponse stopHvacSystemResponse;
 
-		//JSON from String to Object
+		// JSON from String to Object
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(Feature.ALLOW_COMMENTS, true);
-		stopHvacSystemResponse = mapper.readValue(jsonInString, StopHvacSystemResponse.class);
+		stopHvacSystemResponse = mapper.readValue(jsonInString,
+				StopHvacSystemResponse.class);
 
 		return stopHvacSystemResponse;
 
 	}
 
-	public StopHvacSystemResponse(){}
-	
-	public StopHvacSystemResponse(ResponseParamVehicleCommands responseParamVehicleCommands){
-	
-		response=responseParamVehicleCommands;
+	public StopHvacSystemResponse() {
+	}
+
+	public StopHvacSystemResponse(
+			ResponseParamVehicleCommands responseParamVehicleCommands) {
+
+		response = responseParamVehicleCommands;
 
 	}
 

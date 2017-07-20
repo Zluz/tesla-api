@@ -18,9 +18,10 @@ import es.neodoo.vehicle.tesla.invoker.TeslaInvoker;
 
 public class SetChargeLimit {
 
-	private final static Logger log = Logger.getLogger(SetChargeLimit.class.getName());
+	private final static Logger log = Logger
+			.getLogger(SetChargeLimit.class.getName());
 
-	public static final String URL_SET_CHARGE_LIMIT ="/command/set_charge_limit";
+	public static final String URL_SET_CHARGE_LIMIT = "/command/set_charge_limit";
 
 	private static final String PARAM_PERCENT = "percent";
 
@@ -38,7 +39,8 @@ public class SetChargeLimit {
 		this.teslaInvoker = teslaInvoker;
 	}
 
-	public SetChargeLimitResponse execute(int vehicleId, int limitValue) throws OauthInvokerException, TeslaInvokerException{
+	public SetChargeLimitResponse execute(int vehicleId, int limitValue)
+			throws OauthInvokerException, TeslaInvokerException {
 
 		SetChargeLimitResponse setChargeLimitResponse = null;
 
@@ -46,26 +48,35 @@ public class SetChargeLimit {
 
 			String accessToken = teslaInvoker.getAccessToken();
 			Client client = Client.create();
-			WebResource webResource= client
-					.resource(teslaInvoker.getUri() + "/" + TeslaInvoker.URL_PATH_VEHICLES + "/" + vehicleId + 
-							URL_SET_CHARGE_LIMIT + "?" + PARAM_PERCENT + "=" + limitValue);
+			WebResource webResource = client.resource(
+					teslaInvoker.getUri() + "/" + TeslaInvoker.URL_PATH_VEHICLES
+							+ "/" + vehicleId + URL_SET_CHARGE_LIMIT + "?"
+							+ PARAM_PERCENT + "=" + limitValue);
 
-			ClientResponse response = webResource.type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-					.header(OauthInvoker.HEADER_AUTHORIZATION, OauthInvoker.HEADER_AUTHORIZATION_BEARER + " " + accessToken).post(ClientResponse.class);
+			ClientResponse response = webResource
+					.type(MediaType.APPLICATION_JSON)
+					.accept(MediaType.APPLICATION_JSON)
+					.header(OauthInvoker.HEADER_AUTHORIZATION,
+							OauthInvoker.HEADER_AUTHORIZATION_BEARER + " "
+									+ accessToken)
+					.post(ClientResponse.class);
 
 			String output = response.getEntity(String.class);
-			setChargeLimitResponse =  SetChargeLimitResponse.toObject(output);
+			setChargeLimitResponse = SetChargeLimitResponse.toObject(output);
 
 		} catch (OauthInvokerException e) {
 			log.log(Level.SEVERE, "Error invoking oauth : " + e.getMessage());
 			throw e;
 		} catch (IOException e) {
-			log.log(Level.SEVERE, "Error invoking Tesla API : " + e.getMessage());
-			throw new TeslaInvokerException("Error invoking set charge limit service: " + e.getMessage());
+			log.log(Level.SEVERE,
+					"Error invoking Tesla API : " + e.getMessage());
+			throw new TeslaInvokerException(
+					"Error invoking set charge limit service: "
+							+ e.getMessage());
 		}
-		
+
 		return setChargeLimitResponse;
-	
+
 	}
 
 }

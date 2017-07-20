@@ -18,9 +18,10 @@ import es.neodoo.vehicle.tesla.invoker.TeslaInvoker;
 
 public class LockDoors {
 
-	private final static Logger log = Logger.getLogger(LockDoors.class.getName());
+	private final static Logger log = Logger
+			.getLogger(LockDoors.class.getName());
 
-	public static final String URL_LOCK_DOORS ="/command/door_lock";
+	public static final String URL_LOCK_DOORS = "/command/door_lock";
 
 	private TeslaInvoker teslaInvoker;
 
@@ -36,7 +37,8 @@ public class LockDoors {
 		this.teslaInvoker = teslaInvoker;
 	}
 
-	public LockDoorsResponse execute(int vehicleId) throws OauthInvokerException, TeslaInvokerException{
+	public LockDoorsResponse execute(int vehicleId)
+			throws OauthInvokerException, TeslaInvokerException {
 
 		LockDoorsResponse lockDoorsResponse = null;
 
@@ -44,24 +46,33 @@ public class LockDoors {
 
 			String accessToken = teslaInvoker.getAccessToken();
 			Client client = Client.create();
-			WebResource webResource = client.resource(teslaInvoker.getUri() + "/" + TeslaInvoker.URL_PATH_VEHICLES + "/" + vehicleId + URL_LOCK_DOORS);
+			WebResource webResource = client.resource(
+					teslaInvoker.getUri() + "/" + TeslaInvoker.URL_PATH_VEHICLES
+							+ "/" + vehicleId + URL_LOCK_DOORS);
 
-			ClientResponse response = webResource.type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-					.header(OauthInvoker.HEADER_AUTHORIZATION, OauthInvoker.HEADER_AUTHORIZATION_BEARER + " " + accessToken).post(ClientResponse.class);
+			ClientResponse response = webResource
+					.type(MediaType.APPLICATION_JSON)
+					.accept(MediaType.APPLICATION_JSON)
+					.header(OauthInvoker.HEADER_AUTHORIZATION,
+							OauthInvoker.HEADER_AUTHORIZATION_BEARER + " "
+									+ accessToken)
+					.post(ClientResponse.class);
 
 			String output = response.getEntity(String.class);
-			lockDoorsResponse =  LockDoorsResponse.toObject(output);
+			lockDoorsResponse = LockDoorsResponse.toObject(output);
 
 		} catch (OauthInvokerException e) {
 			log.log(Level.SEVERE, "Error invoking oauth : " + e.getMessage());
 			throw e;
 		} catch (IOException e) {
-			log.log(Level.SEVERE, "Error invoking Tesla API : " + e.getMessage());
-			throw new TeslaInvokerException("Error invoking lock doors service: " + e.getMessage());
+			log.log(Level.SEVERE,
+					"Error invoking Tesla API : " + e.getMessage());
+			throw new TeslaInvokerException(
+					"Error invoking lock doors service: " + e.getMessage());
 		}
-		
+
 		return lockDoorsResponse;
-	
+
 	}
 
 }

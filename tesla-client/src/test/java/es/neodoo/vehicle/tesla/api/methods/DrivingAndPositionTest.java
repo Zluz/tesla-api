@@ -14,23 +14,28 @@ public class DrivingAndPositionTest {
 
 	@Test
 	public void testParseResponse() {
-		
+
 		try {
 
-			DrivingAndPositionResponse drivingAndPositionResponse = new DrivingAndPositionResponse(new DrivingAndPositionParamResponse(null, null,  33.794839, -84.401593, 4, 1359863204));
-			String stringDrivingAndPositionResponse = drivingAndPositionResponse.toJson();
-			DrivingAndPositionResponse drivingAndPositionResponseConverted = DrivingAndPositionResponse.toObject(stringDrivingAndPositionResponse);
-			Assert.assertEquals(stringDrivingAndPositionResponse, drivingAndPositionResponseConverted.toJson());
+			DrivingAndPositionResponse drivingAndPositionResponse = new DrivingAndPositionResponse(
+					new DrivingAndPositionParamResponse(null, null, 33.794839,
+							-84.401593, 4, 1359863204));
+			String stringDrivingAndPositionResponse = drivingAndPositionResponse
+					.toJson();
+			DrivingAndPositionResponse drivingAndPositionResponseConverted = DrivingAndPositionResponse
+					.toObject(stringDrivingAndPositionResponse);
+			Assert.assertEquals(stringDrivingAndPositionResponse,
+					drivingAndPositionResponseConverted.toJson());
 		} catch (Exception e) {
 			assertFalse(true);
-		
+
 		}
-	
+
 	}
 
-	//@Test
-	public void testDrivingAndPosition(){
-		
+	// @Test
+	public void testDrivingAndPosition() {
+
 		String url = "http://localhost:8080/TeslaServer/rest";
 		String grantType = "password";
 		String clientId = "81527cff06843c8634fdc09e8ac0abefb46ac849f38fe1e431c2ef2106796384";
@@ -39,16 +44,19 @@ public class DrivingAndPositionTest {
 		String password = "passwordUser123";
 
 		try {
-			
-			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType, clientId, clientSecret, email, password);
-			DrivingAndPosition drivingAndPosition = new DrivingAndPosition(teslaInvoker);
-			DrivingAndPositionResponse drivingAndPositionResponse  = drivingAndPosition.execute(1);
+
+			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType,
+					clientId, clientSecret, email, password);
+			DrivingAndPosition drivingAndPosition = new DrivingAndPosition(
+					teslaInvoker);
+			DrivingAndPositionResponse drivingAndPositionResponse = drivingAndPosition
+					.execute(1);
 			assertNotNull(drivingAndPositionResponse);
-		
+
 		} catch (Exception e) {
-			assertFalse(true);		
-		}	
-	
+			assertFalse(true);
+		}
+
 	}
 
 }

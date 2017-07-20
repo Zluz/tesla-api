@@ -1,7 +1,7 @@
 package es.neodoo.vehicle.tesla.api.params;
 
 public class ResponseParamVehicleCommands {
-	
+
 	private Boolean result;
 
 	private String reason;
@@ -22,7 +22,8 @@ public class ResponseParamVehicleCommands {
 		this.reason = reason;
 	}
 
-	public ResponseParamVehicleCommands(){}
+	public ResponseParamVehicleCommands() {
+	}
 
 	public ResponseParamVehicleCommands(Boolean result, String reason) {
 

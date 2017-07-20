@@ -39,32 +39,36 @@ public class DrivingAndPositionResponse {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		//Object to JSON in String
+		// Object to JSON in String
 		jsonInString = mapper.writeValueAsString(this);
 
 		return jsonInString;
 
 	}
 
-	public static DrivingAndPositionResponse toObject(String jsonInString) throws JsonParseException, JsonMappingException, IOException {
+	public static DrivingAndPositionResponse toObject(String jsonInString)
+			throws JsonParseException, JsonMappingException, IOException {
 
 		DrivingAndPositionResponse drivingAndPositionResponse;
 
-		//JSON from String to Object
+		// JSON from String to Object
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(Feature.ALLOW_COMMENTS, true);
-		drivingAndPositionResponse = mapper.readValue(jsonInString, DrivingAndPositionResponse.class);
+		drivingAndPositionResponse = mapper.readValue(jsonInString,
+				DrivingAndPositionResponse.class);
 
 		return drivingAndPositionResponse;
-	
+
 	}
 
-	public DrivingAndPositionResponse(){}
-	
-	public DrivingAndPositionResponse(DrivingAndPositionParamResponse drivingAndPositionParamResponse){
-	
-		response=drivingAndPositionParamResponse;
-	
+	public DrivingAndPositionResponse() {
+	}
+
+	public DrivingAndPositionResponse(
+			DrivingAndPositionParamResponse drivingAndPositionParamResponse) {
+
+		response = drivingAndPositionParamResponse;
+
 	}
 
 }

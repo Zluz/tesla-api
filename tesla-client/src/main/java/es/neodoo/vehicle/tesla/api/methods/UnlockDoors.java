@@ -17,10 +17,11 @@ import es.neodoo.vehicle.tesla.invoker.OauthInvoker;
 import es.neodoo.vehicle.tesla.invoker.TeslaInvoker;
 
 public class UnlockDoors {
-	
-	private final static Logger log = Logger.getLogger(UnlockDoors.class.getName());
 
-	public static final String URL_UNLOCK_DOORS ="/command/door_unlock";
+	private final static Logger log = Logger
+			.getLogger(UnlockDoors.class.getName());
+
+	public static final String URL_UNLOCK_DOORS = "/command/door_unlock";
 
 	private TeslaInvoker teslaInvoker;
 
@@ -36,32 +37,42 @@ public class UnlockDoors {
 		this.teslaInvoker = teslaInvoker;
 	}
 
-	public UnlockDoorsResponse execute(int vehicleId) throws OauthInvokerException, TeslaInvokerException{
-		
+	public UnlockDoorsResponse execute(int vehicleId)
+			throws OauthInvokerException, TeslaInvokerException {
+
 		UnlockDoorsResponse unlockDoorsResponse = null;
-		
+
 		try {
-			
+
 			String accessToken = teslaInvoker.getAccessToken();
 			Client client = Client.create();
-			WebResource webResource = client.resource(teslaInvoker.getUri() + "/" + TeslaInvoker.URL_PATH_VEHICLES + "/" + vehicleId + URL_UNLOCK_DOORS);
+			WebResource webResource = client.resource(
+					teslaInvoker.getUri() + "/" + TeslaInvoker.URL_PATH_VEHICLES
+							+ "/" + vehicleId + URL_UNLOCK_DOORS);
 
-			ClientResponse response = webResource.type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-					.header(OauthInvoker.HEADER_AUTHORIZATION, OauthInvoker.HEADER_AUTHORIZATION_BEARER + " " + accessToken).post(ClientResponse.class);
+			ClientResponse response = webResource
+					.type(MediaType.APPLICATION_JSON)
+					.accept(MediaType.APPLICATION_JSON)
+					.header(OauthInvoker.HEADER_AUTHORIZATION,
+							OauthInvoker.HEADER_AUTHORIZATION_BEARER + " "
+									+ accessToken)
+					.post(ClientResponse.class);
 
 			String output = response.getEntity(String.class);
-			unlockDoorsResponse =  UnlockDoorsResponse.toObject(output);
-		
+			unlockDoorsResponse = UnlockDoorsResponse.toObject(output);
+
 		} catch (OauthInvokerException e) {
 			log.log(Level.SEVERE, "Error invoking oauth : " + e.getMessage());
 			throw e;
 		} catch (IOException e) {
-			log.log(Level.SEVERE, "Error invoking Tesla API : " + e.getMessage());
-			throw new TeslaInvokerException("Error invoking unlock doors service: " + e.getMessage());
+			log.log(Level.SEVERE,
+					"Error invoking Tesla API : " + e.getMessage());
+			throw new TeslaInvokerException(
+					"Error invoking unlock doors service: " + e.getMessage());
 		}
-		
+
 		return unlockDoorsResponse;
-	
+
 	}
 
 }

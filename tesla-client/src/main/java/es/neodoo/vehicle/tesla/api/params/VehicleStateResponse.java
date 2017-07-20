@@ -50,32 +50,36 @@ public class VehicleStateResponse {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		//Object to JSON in String
+		// Object to JSON in String
 		jsonInString = mapper.writeValueAsString(this);
 
 		return jsonInString;
 
 	}
 
-	public static VehicleStateResponse toObject(String jsonInString) throws JsonParseException, JsonMappingException, IOException {
+	public static VehicleStateResponse toObject(String jsonInString)
+			throws JsonParseException, JsonMappingException, IOException {
 
 		VehicleStateResponse vehicleStateResponse;
 
-		//JSON from String to Object
+		// JSON from String to Object
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(Feature.ALLOW_COMMENTS, true);
-		vehicleStateResponse = mapper.readValue(jsonInString, VehicleStateResponse.class);
+		vehicleStateResponse = mapper.readValue(jsonInString,
+				VehicleStateResponse.class);
 
 		return vehicleStateResponse;
 
 	}
 
-	public VehicleStateResponse(){}
+	public VehicleStateResponse() {
+	}
 
-	public VehicleStateResponse(VehicleStateParamResponse vehicleStateParamResponse){
-	
-		response=vehicleStateParamResponse;
-	
+	public VehicleStateResponse(
+			VehicleStateParamResponse vehicleStateParamResponse) {
+
+		response = vehicleStateParamResponse;
+
 	}
 
 }

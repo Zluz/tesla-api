@@ -14,21 +14,22 @@ public class HonkHornTest {
 	@Test
 	public void testParseResponse() {
 		try {
-			HonkHornResponse honkHornResponse =
-					new HonkHornResponse(new ResponseParamVehicleCommands(true, ""));
+			HonkHornResponse honkHornResponse = new HonkHornResponse(
+					new ResponseParamVehicleCommands(true, ""));
 			String stringHonkHornResponse = honkHornResponse.toJson();
-			HonkHornResponse honkHornResponseConverted = 
-					HonkHornResponse.toObject(stringHonkHornResponse);
-			assertEquals(stringHonkHornResponse, honkHornResponseConverted.toJson());
-		
+			HonkHornResponse honkHornResponseConverted = HonkHornResponse
+					.toObject(stringHonkHornResponse);
+			assertEquals(stringHonkHornResponse,
+					honkHornResponseConverted.toJson());
+
 		} catch (Exception e) {
 			assertFalse(true);
-		}	
-		
+		}
+
 	}
 
-	//@Test
-	public void testHonkHorn(){
+	// @Test
+	public void testHonkHorn() {
 
 		String url = "http://localhost:8080/TeslaServer/rest";
 		String grantType = "password";
@@ -36,18 +37,19 @@ public class HonkHornTest {
 		String clientSecret = "c7257eb71a564034f9419ee651c7d0e5f7aa6bfbd18bafb5c5c033b093bb2fa3";
 		String email = "usuario@gmail.com";
 		String password = "passwordUser123";
-		
+
 		try {
-	
-			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType, clientId, clientSecret, email, password);
+
+			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType,
+					clientId, clientSecret, email, password);
 			HonkHorn honkHorn = new HonkHorn(teslaInvoker);
-			HonkHornResponse honkHornResponse  = honkHorn.execute(1);
+			HonkHornResponse honkHornResponse = honkHorn.execute(1);
 			assertNotNull(honkHornResponse);
-		
+
 		} catch (Exception e) {
 			assertFalse(true);
-		}	
-	
+		}
+
 	}
 
 }

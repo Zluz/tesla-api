@@ -17,7 +17,8 @@ public class MobileAccesResponse {
 
 	private boolean response;
 
-	public MobileAccesResponse(){}
+	public MobileAccesResponse() {
+	}
 
 	public boolean isResponse() {
 		return response;
@@ -33,24 +34,25 @@ public class MobileAccesResponse {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		//Object to JSON in String
+		// Object to JSON in String
 		jsonInString = mapper.writeValueAsString(this);
 
 		return jsonInString;
 
 	}
 
-	public static MobileAccesResponse toObject(String jsonInString) throws JsonParseException, JsonMappingException, IOException {
+	public static MobileAccesResponse toObject(String jsonInString)
+			throws JsonParseException, JsonMappingException, IOException {
 
 		MobileAccesResponse mAResponse;
 
-		//JSON from String to Object
+		// JSON from String to Object
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(Feature.ALLOW_COMMENTS, true);
 		mAResponse = mapper.readValue(jsonInString, MobileAccesResponse.class);
 
 		return mAResponse;
-	
+
 	}
 
 }

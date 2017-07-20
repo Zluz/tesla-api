@@ -18,7 +18,8 @@ public class MobileAccesTest {
 		try {
 
 			String jsonResponse = "{\"response\":true}";
-			MobileAccesResponse mar = MobileAccesResponse.toObject(jsonResponse);
+			MobileAccesResponse mar = MobileAccesResponse
+					.toObject(jsonResponse);
 			String jsonFromObject = mar.toJson();
 			assertEquals(jsonResponse, jsonFromObject);
 
@@ -28,9 +29,9 @@ public class MobileAccesTest {
 
 	}
 
-	//@Test
+	// @Test
 	public void testMobileAcces() {
-		
+
 		String url = "http://localhost:8080/TeslaServer/rest";
 		String grantType = "password";
 		String clientId = "81527cff06843c8634fdc09e8ac0abefb46ac849f38fe1e431c2ef2106796384";
@@ -39,16 +40,17 @@ public class MobileAccesTest {
 		String password = "passwordUser123";
 
 		try {
-		
-			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType, clientId, clientSecret, email, password);
+
+			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType,
+					clientId, clientSecret, email, password);
 			MobileAcces mobileAcces = new MobileAcces(teslaInvoker);
 			MobileAccesResponse mobileAccesResponse = mobileAcces.execute(1);
 			assertNotNull(mobileAccesResponse);
-		
+
 		} catch (Exception e) {
 			assertFalse(true);
-		}	
-	
+		}
+
 	}
 
 }

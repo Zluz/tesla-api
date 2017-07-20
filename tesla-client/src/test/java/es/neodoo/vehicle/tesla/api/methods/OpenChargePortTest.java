@@ -14,16 +14,20 @@ public class OpenChargePortTest {
 	@Test
 	public void testParseResponse() {
 		try {
-			OpenChargePortResponse openChargePortResponse = new OpenChargePortResponse(new ResponseParamVehicleCommands(true, ""));
-			String stringOpenChargePortResponse = openChargePortResponse.toJson();
-			OpenChargePortResponse openChargePortResponseConverted = OpenChargePortResponse.toObject(stringOpenChargePortResponse);
-			assertEquals(stringOpenChargePortResponse, openChargePortResponseConverted.toJson());
+			OpenChargePortResponse openChargePortResponse = new OpenChargePortResponse(
+					new ResponseParamVehicleCommands(true, ""));
+			String stringOpenChargePortResponse = openChargePortResponse
+					.toJson();
+			OpenChargePortResponse openChargePortResponseConverted = OpenChargePortResponse
+					.toObject(stringOpenChargePortResponse);
+			assertEquals(stringOpenChargePortResponse,
+					openChargePortResponseConverted.toJson());
 		} catch (Exception e) {
 			assertFalse(true);
 		}
 	}
 
-	//@Test
+	// @Test
 	public void testOpenChargePort() {
 
 		String url = "http://localhost:8080/TeslaServer/rest";
@@ -32,18 +36,20 @@ public class OpenChargePortTest {
 		String clientSecret = "c7257eb71a564034f9419ee651c7d0e5f7aa6bfbd18bafb5c5c033b093bb2fa3";
 		String email = "usuario@gmail.com";
 		String password = "passwordUser123";
-		
+
 		try {
 
-			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType, clientId, clientSecret, email, password);
+			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType,
+					clientId, clientSecret, email, password);
 			OpenChargePort openChargePort = new OpenChargePort(teslaInvoker);
-			OpenChargePortResponse openChargePortResponse  = openChargePort.execute(1);
+			OpenChargePortResponse openChargePortResponse = openChargePort
+					.execute(1);
 			assertNotNull(openChargePortResponse);
-		
+
 		} catch (Exception e) {
 			assertFalse(true);
-		}	
-	
+		}
+
 	}
 
 }

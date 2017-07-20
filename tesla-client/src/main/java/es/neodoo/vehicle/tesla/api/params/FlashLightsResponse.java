@@ -26,30 +26,34 @@ public class FlashLightsResponse {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		//Object to JSON in String
+		// Object to JSON in String
 		jsonInString = mapper.writeValueAsString(this);
 
 		return jsonInString;
 
 	}
 
-	public static FlashLightsResponse toObject(String jsonInString) throws JsonParseException, JsonMappingException, IOException {
+	public static FlashLightsResponse toObject(String jsonInString)
+			throws JsonParseException, JsonMappingException, IOException {
 
 		FlashLightsResponse flashLightsResponse;
 
-		//JSON from String to Object
+		// JSON from String to Object
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(Feature.ALLOW_COMMENTS, true);
-		flashLightsResponse = mapper.readValue(jsonInString, FlashLightsResponse.class);
+		flashLightsResponse = mapper.readValue(jsonInString,
+				FlashLightsResponse.class);
 
 		return flashLightsResponse;
 	}
 
-	public FlashLightsResponse(){}
-	
-	public FlashLightsResponse(ResponseParamVehicleCommands responseParamVehicleCommands){
-	
-		response=responseParamVehicleCommands;
-	
+	public FlashLightsResponse() {
+	}
+
+	public FlashLightsResponse(
+			ResponseParamVehicleCommands responseParamVehicleCommands) {
+
+		response = responseParamVehicleCommands;
+
 	}
 }

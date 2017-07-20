@@ -10,7 +10,7 @@ public class DrivingAndPositionParamResponse {
 
 	private double longitude;
 
-	private int heading; //0-359
+	private int heading; // 0-359
 
 	private int gps_as_of;
 
@@ -62,15 +62,17 @@ public class DrivingAndPositionParamResponse {
 		this.gps_as_of = gps_as_of;
 	}
 
-	public DrivingAndPositionParamResponse(){}
+	public DrivingAndPositionParamResponse() {
+	}
 
-	public DrivingAndPositionParamResponse(String shiftState, String speed, double latitude, double longitude, int heading, int gpsAsOf){
-	
+	public DrivingAndPositionParamResponse(String shiftState, String speed,
+			double latitude, double longitude, int heading, int gpsAsOf) {
+
 		shift_state = shiftState;
-		this.latitude=latitude;
-		this.longitude=longitude;
-		this.heading=heading;
-		gps_as_of=gpsAsOf;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.heading = heading;
+		gps_as_of = gpsAsOf;
 
 	}
 

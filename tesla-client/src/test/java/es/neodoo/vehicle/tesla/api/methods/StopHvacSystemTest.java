@@ -13,21 +13,25 @@ public class StopHvacSystemTest {
 
 	@Test
 	public void testParseResponse() {
-	
+
 		try {
-		
-			StopHvacSystemResponse stopHvacSystemResponse = new StopHvacSystemResponse(new ResponseParamVehicleCommands(true, ""));
-			String stringStopHvacSystemResponse = stopHvacSystemResponse.toJson();
-			StopHvacSystemResponse stopHvacSystemResponseConverted = StopHvacSystemResponse.toObject(stringStopHvacSystemResponse);
-			assertEquals(stringStopHvacSystemResponse, stopHvacSystemResponseConverted.toJson());
-		
+
+			StopHvacSystemResponse stopHvacSystemResponse = new StopHvacSystemResponse(
+					new ResponseParamVehicleCommands(true, ""));
+			String stringStopHvacSystemResponse = stopHvacSystemResponse
+					.toJson();
+			StopHvacSystemResponse stopHvacSystemResponseConverted = StopHvacSystemResponse
+					.toObject(stringStopHvacSystemResponse);
+			assertEquals(stringStopHvacSystemResponse,
+					stopHvacSystemResponseConverted.toJson());
+
 		} catch (Exception e) {
 			assertFalse(true);
 		}
-	
+
 	}
-	
-	//@Test
+
+	// @Test
 	public void testStoptHvacSystem() {
 
 		String url = "http://localhost:8080/TeslaServer/rest";
@@ -36,18 +40,20 @@ public class StopHvacSystemTest {
 		String clientSecret = "c7257eb71a564034f9419ee651c7d0e5f7aa6bfbd18bafb5c5c033b093bb2fa3";
 		String email = "usuario@gmail.com";
 		String password = "passwordUser123";
-		
+
 		try {
-	
-			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType, clientId, clientSecret, email, password);
+
+			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType,
+					clientId, clientSecret, email, password);
 			StopHvacSystem stopHvacSystem = new StopHvacSystem(teslaInvoker);
-			StopHvacSystemResponse stopHvacSystemResponse  = stopHvacSystem.execute(1);
+			StopHvacSystemResponse stopHvacSystemResponse = stopHvacSystem
+					.execute(1);
 			assertNotNull(stopHvacSystemResponse);
-		
+
 		} catch (Exception e) {
 			assertFalse(true);
-		}	
-	
+		}
+
 	}
 
 }

@@ -79,6 +79,7 @@ public class ListVehiclesParamResponse {
 	public String getState() {
 		return state;
 	}
+
 	public String[] getTokens() {
 		return tokens;
 	}
@@ -86,26 +87,28 @@ public class ListVehiclesParamResponse {
 	public void setTokens(String[] tokens) {
 		this.tokens = tokens;
 	}
+
 	public void setState(String state) {
 		this.state = state;
 	}
 
-
 	public ListVehiclesParamResponse() {
 	}
-	
-	public ListVehiclesParamResponse(String color, String displayName, int id,String optionsCodes, int userId, int vehicleId, String vin, String[] tokens,String state ){
 
-		this.color=color;
-		this.display_name=displayName;
-		this.id=id;
-		this.options_codes=optionsCodes;
-		this.user_id =userId;
-		this.vehicle_id=vehicleId;
-		this.vin=vin;
-		this.tokens=tokens;
-		this.state=state;
-	
+	public ListVehiclesParamResponse(String color, String displayName, int id,
+			String optionsCodes, int userId, int vehicleId, String vin,
+			String[] tokens, String state) {
+
+		this.color = color;
+		this.display_name = displayName;
+		this.id = id;
+		this.options_codes = optionsCodes;
+		this.user_id = userId;
+		this.vehicle_id = vehicleId;
+		this.vin = vin;
+		this.tokens = tokens;
+		this.state = state;
+
 	}
 
 }

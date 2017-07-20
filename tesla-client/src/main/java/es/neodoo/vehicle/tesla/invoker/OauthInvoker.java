@@ -19,11 +19,12 @@ import es.neodoo.vehicle.tesla.api.params.OauthResponse;
 
 public class OauthInvoker {
 
-	private final static Logger log = Logger.getLogger(OauthInvoker.class.getName());
+	private final static Logger log = Logger
+			.getLogger(OauthInvoker.class.getName());
 
 	public static final String HEADER_AUTHORIZATION = "Authorization";
 
-	public static final  String HEADER_AUTHORIZATION_BEARER = "Bearer";
+	public static final String HEADER_AUTHORIZATION_BEARER = "Bearer";
 
 	public static final String URL_OAUTH_TOKEN = "oauth/token";
 
@@ -33,11 +34,13 @@ public class OauthInvoker {
 
 	private OauthResponse oauthResponse;
 
-	public OauthInvoker(String uri, String grantType, String clientId, String clientSecret, String email, String password) {
+	public OauthInvoker(String uri, String grantType, String clientId,
+			String clientSecret, String email, String password) {
 
 		this.uri = uri;
-		this.oauthRequest = new OauthRequest(clientId, clientSecret, email,  password);
-	
+		this.oauthRequest = new OauthRequest(clientId, clientSecret, email,
+				password);
+
 	}
 
 	public String getUri() {
@@ -71,50 +74,59 @@ public class OauthInvoker {
 	public boolean isAccessTokenValid() {
 
 		if (oauthResponse != null) {
-			
-			Long createdAt = (long) (oauthResponse.getCreated_at())*1000;
+
+			Long createdAt = (long) (oauthResponse.getCreated_at()) * 1000;
 			Date dateCreated = new Date(createdAt);
 			Calendar calendarCreatedAt = Calendar.getInstance();
 			calendarCreatedAt.setTime(dateCreated);
-			calendarCreatedAt.add(Calendar.MILLISECOND, oauthResponse.getExpires_in());
+			calendarCreatedAt.add(Calendar.MILLISECOND,
+					oauthResponse.getExpires_in());
 			Calendar calendarNow = Calendar.getInstance();
-			
-			if (calendarCreatedAt.after(calendarNow)){
-	
+
+			if (calendarCreatedAt.after(calendarNow)) {
+
 				return true;
-			
+
 			}
-			
+
 			return false;
-		
+
 		}
-		
+
 		return false;
-	
+
 	}
 
-	public OauthResponse callOauthServer() throws OauthInvokerException, TeslaInvokerException  {
+	public OauthResponse callOauthServer()
+			throws OauthInvokerException, TeslaInvokerException {
 
 		try {
-			
-			if (isAccessTokenValid()){
-				
+
+			if (isAccessTokenValid()) {
+
 				return oauthResponse;
-			
+
 			}
-			
-			else{
+
+			else {
 				// Call Oauth server
 				Client client = Client.create();
-				WebResource webResource= client .resource(uri + "/" +  URL_OAUTH_TOKEN);
-				ClientResponse response = webResource.type(MediaType.APPLICATION_JSON).post(ClientResponse.class);
+				WebResource webResource = client
+						.resource(uri + "/" + URL_OAUTH_TOKEN);
+				ClientResponse response = webResource
+						.type(MediaType.APPLICATION_JSON)
+						.post(ClientResponse.class);
 
 				String output = response.getEntity(String.class);
-				this.oauthResponse =  OauthResponse.toObject(output);}
+				this.oauthResponse = OauthResponse.toObject(output);
+			}
 
 		} catch (IOException e) {
-			log.log(Level.SEVERE, "Error invoking Tesla API : " + e.getMessage());
-			throw new TeslaInvokerException("Error invoking get an acces token service: " + e.getMessage());
+			log.log(Level.SEVERE,
+					"Error invoking Tesla API : " + e.getMessage());
+			throw new TeslaInvokerException(
+					"Error invoking get an acces token service: "
+							+ e.getMessage());
 		}
 
 		return oauthResponse;

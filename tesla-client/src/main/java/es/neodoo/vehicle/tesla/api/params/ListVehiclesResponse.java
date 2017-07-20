@@ -36,13 +36,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class ListVehiclesResponse {
 
-	private  List<ListVehiclesParamResponse> response;
+	private List<ListVehiclesParamResponse> response;
 
 	private int count;
 
-	public ListVehiclesResponse() {}
-	
-	public ListVehiclesResponse(List<ListVehiclesParamResponse> response, int count) {
+	public ListVehiclesResponse() {
+	}
+
+	public ListVehiclesResponse(List<ListVehiclesParamResponse> response,
+			int count) {
 		this.response = response;
 		this.count = count;
 	}
@@ -69,24 +71,26 @@ public class ListVehiclesResponse {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		//Object to JSON in String
+		// Object to JSON in String
 		jsonInString = mapper.writeValueAsString(this);
 
 		return jsonInString;
 
 	}
 
-	public ListVehiclesResponse toObject(String jsonInString) throws JsonParseException, JsonMappingException, IOException {
+	public ListVehiclesResponse toObject(String jsonInString)
+			throws JsonParseException, JsonMappingException, IOException {
 
 		ListVehiclesResponse lVehiclesResponse;
 
-		//JSON from String to Object
+		// JSON from String to Object
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(Feature.ALLOW_COMMENTS, true);
-		lVehiclesResponse = mapper.readValue(jsonInString, ListVehiclesResponse.class);
+		lVehiclesResponse = mapper.readValue(jsonInString,
+				ListVehiclesResponse.class);
 
 		return lVehiclesResponse;
-	
+
 	}
 
 }

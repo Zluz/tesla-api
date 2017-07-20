@@ -13,23 +13,26 @@ public class SetChargeLimitToMaxRangeTest {
 
 	@Test
 	public void testParseResponse() {
-		
+
 		try {
-		
-			SetChargeLimitToMaxRangeResponse setChargeLimitToMaxRangeResponse =
-					new SetChargeLimitToMaxRangeResponse(new ResponseParamVehicleCommands(false, "already_max_range"));
-			String stringSetChargeLimitToMaxRangeResponse = setChargeLimitToMaxRangeResponse.toJson();
-			SetChargeLimitToMaxRangeResponse setChargeLimitToMaxRangeResponseConverted = 
-					SetChargeLimitToMaxRangeResponse.toObject(stringSetChargeLimitToMaxRangeResponse);
-			assertEquals(stringSetChargeLimitToMaxRangeResponse, setChargeLimitToMaxRangeResponseConverted.toJson());
-		
+
+			SetChargeLimitToMaxRangeResponse setChargeLimitToMaxRangeResponse = new SetChargeLimitToMaxRangeResponse(
+					new ResponseParamVehicleCommands(false,
+							"already_max_range"));
+			String stringSetChargeLimitToMaxRangeResponse = setChargeLimitToMaxRangeResponse
+					.toJson();
+			SetChargeLimitToMaxRangeResponse setChargeLimitToMaxRangeResponseConverted = SetChargeLimitToMaxRangeResponse
+					.toObject(stringSetChargeLimitToMaxRangeResponse);
+			assertEquals(stringSetChargeLimitToMaxRangeResponse,
+					setChargeLimitToMaxRangeResponseConverted.toJson());
+
 		} catch (Exception e) {
 			assertFalse(true);
 		}
-	
+
 	}
 
-	//@Test
+	// @Test
 	public void testSetChargeLimitToMaxRange() {
 
 		String url = "http://localhost:8080/TeslaServer/rest";
@@ -38,18 +41,21 @@ public class SetChargeLimitToMaxRangeTest {
 		String clientSecret = "c7257eb71a564034f9419ee651c7d0e5f7aa6bfbd18bafb5c5c033b093bb2fa3";
 		String email = "usuario@gmail.com";
 		String password = "passwordUser123";
-		
+
 		try {
-		
-			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType, clientId, clientSecret, email, password);
-			SetChargeLimitToMaxRange setChargeLimitToMaxRange = new SetChargeLimitToMaxRange(teslaInvoker);
-			SetChargeLimitToMaxRangeResponse setChargeLimitToMaxRangeResponse  = setChargeLimitToMaxRange.execute(1);
+
+			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType,
+					clientId, clientSecret, email, password);
+			SetChargeLimitToMaxRange setChargeLimitToMaxRange = new SetChargeLimitToMaxRange(
+					teslaInvoker);
+			SetChargeLimitToMaxRangeResponse setChargeLimitToMaxRangeResponse = setChargeLimitToMaxRange
+					.execute(1);
 			assertNotNull(setChargeLimitToMaxRangeResponse);
 
 		} catch (Exception e) {
 			assertFalse(true);
-		}	
-	
+		}
+
 	}
 
 }

@@ -13,21 +13,24 @@ public class UnlockDoorsTest {
 
 	@Test
 	public void testParseResponse() {
-		
+
 		try {
-		
-			UnlockDoorsResponse unlockDoorsResponse = new UnlockDoorsResponse(new ResponseParamVehicleCommands(true, ""));
+
+			UnlockDoorsResponse unlockDoorsResponse = new UnlockDoorsResponse(
+					new ResponseParamVehicleCommands(true, ""));
 			String stringUnlockDoorsResponse = unlockDoorsResponse.toJson();
-			UnlockDoorsResponse unlockDoorsResponseConverted = UnlockDoorsResponse.toObject(stringUnlockDoorsResponse);
-			assertEquals(stringUnlockDoorsResponse, unlockDoorsResponseConverted.toJson());
-		
+			UnlockDoorsResponse unlockDoorsResponseConverted = UnlockDoorsResponse
+					.toObject(stringUnlockDoorsResponse);
+			assertEquals(stringUnlockDoorsResponse,
+					unlockDoorsResponseConverted.toJson());
+
 		} catch (Exception e) {
 			assertFalse(true);
 		}
-	
+
 	}
 
-	//@Test
+	// @Test
 	public void testUnlockDoors() {
 
 		String url = "http://localhost:8080/TeslaServer/rest";
@@ -36,18 +39,19 @@ public class UnlockDoorsTest {
 		String clientSecret = "c7257eb71a564034f9419ee651c7d0e5f7aa6bfbd18bafb5c5c033b093bb2fa3";
 		String email = "usuario@gmail.com";
 		String password = "passwordUser123";
-		
+
 		try {
 
-			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType, clientId, clientSecret, email, password);
+			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType,
+					clientId, clientSecret, email, password);
 			UnlockDoors unlockDoors = new UnlockDoors(teslaInvoker);
-			UnlockDoorsResponse unlockDoorsResponse  = unlockDoors.execute(1);
+			UnlockDoorsResponse unlockDoorsResponse = unlockDoors.execute(1);
 			assertNotNull(unlockDoorsResponse);
 
 		} catch (Exception e) {
 			assertFalse(true);
-		}	
-	
+		}
+
 	}
 
 }

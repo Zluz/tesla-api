@@ -82,19 +82,22 @@ public class ClimateSettingsParamResponse {
 		this.fan_status = fan_status;
 	}
 
-	public ClimateSettingsParamResponse (){}
+	public ClimateSettingsParamResponse() {
+	}
 
-	public ClimateSettingsParamResponse (double insideTemp, double outsideTemp, double driverTempSetting, double passengerTempSetting,
-			Boolean isAutoConditioningOn, Boolean isFrontDefrosterOn, Boolean isRearDefrosterOn, int fanStatus){
+	public ClimateSettingsParamResponse(double insideTemp, double outsideTemp,
+			double driverTempSetting, double passengerTempSetting,
+			Boolean isAutoConditioningOn, Boolean isFrontDefrosterOn,
+			Boolean isRearDefrosterOn, int fanStatus) {
 
-		inside_temp=insideTemp;		
-		outside_temp=outsideTemp;		
-		driver_temp_setting=driverTempSetting;		
-		passenger_temp_setting=passengerTempSetting;		
-		is_auto_conditioning_on=isAutoConditioningOn;		
-		is_front_defroster_on=isFrontDefrosterOn;	
-		is_rear_defroster_on=isRearDefrosterOn;		
-		fan_status=fanStatus;
+		inside_temp = insideTemp;
+		outside_temp = outsideTemp;
+		driver_temp_setting = driverTempSetting;
+		passenger_temp_setting = passengerTempSetting;
+		is_auto_conditioning_on = isAutoConditioningOn;
+		is_front_defroster_on = isFrontDefrosterOn;
+		is_rear_defroster_on = isRearDefrosterOn;
+		fan_status = fanStatus;
 
 	}
 

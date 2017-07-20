@@ -18,9 +18,10 @@ import es.neodoo.vehicle.tesla.invoker.TeslaInvoker;
 
 public class DrivingAndPosition {
 
-	private final static Logger log = Logger.getLogger(DrivingAndPosition.class.getName());
+	private final static Logger log = Logger
+			.getLogger(DrivingAndPosition.class.getName());
 
-	public static final String URL_DRIVING_AND_POSITION ="/data_request/drive_state";
+	public static final String URL_DRIVING_AND_POSITION = "/data_request/drive_state";
 
 	private TeslaInvoker teslaInvoker;
 
@@ -36,7 +37,8 @@ public class DrivingAndPosition {
 		this.teslaInvoker = teslaInvoker;
 	}
 
-	public DrivingAndPositionResponse execute(int vehicleId) throws OauthInvokerException, TeslaInvokerException {
+	public DrivingAndPositionResponse execute(int vehicleId)
+			throws OauthInvokerException, TeslaInvokerException {
 
 		DrivingAndPositionResponse drivingAndPositionResponse = null;
 
@@ -44,25 +46,35 @@ public class DrivingAndPosition {
 
 			String accessToken = teslaInvoker.getAccessToken();
 			Client client = Client.create();
-			WebResource webResource= client
-					.resource(teslaInvoker.getUri() + "/" + TeslaInvoker.URL_PATH_VEHICLES + "/" + vehicleId + URL_DRIVING_AND_POSITION);
+			WebResource webResource = client.resource(
+					teslaInvoker.getUri() + "/" + TeslaInvoker.URL_PATH_VEHICLES
+							+ "/" + vehicleId + URL_DRIVING_AND_POSITION);
 
-			ClientResponse response = webResource.type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-					.header(OauthInvoker.HEADER_AUTHORIZATION, OauthInvoker.HEADER_AUTHORIZATION_BEARER + " " + accessToken).get(ClientResponse.class);
+			ClientResponse response = webResource
+					.type(MediaType.APPLICATION_JSON)
+					.accept(MediaType.APPLICATION_JSON)
+					.header(OauthInvoker.HEADER_AUTHORIZATION,
+							OauthInvoker.HEADER_AUTHORIZATION_BEARER + " "
+									+ accessToken)
+					.get(ClientResponse.class);
 
 			String output = response.getEntity(String.class);
-			drivingAndPositionResponse =  DrivingAndPositionResponse.toObject(output);
+			drivingAndPositionResponse = DrivingAndPositionResponse
+					.toObject(output);
 
 		} catch (OauthInvokerException e) {
 			log.log(Level.SEVERE, "Error invoking oauth : " + e.getMessage());
 			throw e;
 		} catch (IOException e) {
-			log.log(Level.SEVERE, "Error invoking Tesla API : " + e.getMessage());
-			throw new TeslaInvokerException("Error invoking driving and position service: " + e.getMessage());
+			log.log(Level.SEVERE,
+					"Error invoking Tesla API : " + e.getMessage());
+			throw new TeslaInvokerException(
+					"Error invoking driving and position service: "
+							+ e.getMessage());
 		}
-		
+
 		return drivingAndPositionResponse;
-	
+
 	}
 
 }

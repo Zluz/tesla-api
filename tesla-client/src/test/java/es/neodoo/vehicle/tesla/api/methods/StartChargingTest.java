@@ -13,23 +13,24 @@ public class StartChargingTest {
 
 	@Test
 	public void testParseResponse() {
-	
+
 		try {
-		
-			StartChargingResponse startChargingResponse =
-					new StartChargingResponse(new ResponseParamVehicleCommands(true, ""));
+
+			StartChargingResponse startChargingResponse = new StartChargingResponse(
+					new ResponseParamVehicleCommands(true, ""));
 			String stringStartChargingResponse = startChargingResponse.toJson();
-			StartChargingResponse startChargingResponseConverted = 
-					StartChargingResponse.toObject(stringStartChargingResponse);
-			assertEquals(stringStartChargingResponse, startChargingResponseConverted.toJson());
-		
+			StartChargingResponse startChargingResponseConverted = StartChargingResponse
+					.toObject(stringStartChargingResponse);
+			assertEquals(stringStartChargingResponse,
+					startChargingResponseConverted.toJson());
+
 		} catch (Exception e) {
 			assertFalse(true);
 		}
-	
+
 	}
-	
-	//@Test
+
+	// @Test
 	public void testStartCharging() {
 
 		String url = "http://localhost:8080/TeslaServer/rest";
@@ -38,18 +39,20 @@ public class StartChargingTest {
 		String clientSecret = "c7257eb71a564034f9419ee651c7d0e5f7aa6bfbd18bafb5c5c033b093bb2fa3";
 		String email = "usuario@gmail.com";
 		String password = "passwordUser123";
-		
+
 		try {
-	
-			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType, clientId, clientSecret, email, password);
+
+			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType,
+					clientId, clientSecret, email, password);
 			StartCharging startCharging = new StartCharging(teslaInvoker);
-			StartChargingResponse startChargingResponse  = startCharging.execute(1);
+			StartChargingResponse startChargingResponse = startCharging
+					.execute(1);
 			assertNotNull(startChargingResponse);
-		
+
 		} catch (Exception e) {
 			assertFalse(true);
-		}	
-	
+		}
+
 	}
 
 }

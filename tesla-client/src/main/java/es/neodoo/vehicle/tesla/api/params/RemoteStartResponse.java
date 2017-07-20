@@ -26,32 +26,36 @@ public class RemoteStartResponse {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		//Object to JSON in String
+		// Object to JSON in String
 		jsonInString = mapper.writeValueAsString(this);
 
 		return jsonInString;
 
 	}
 
-	public static RemoteStartResponse toObject(String jsonInString) throws JsonParseException, JsonMappingException, IOException {
+	public static RemoteStartResponse toObject(String jsonInString)
+			throws JsonParseException, JsonMappingException, IOException {
 
 		RemoteStartResponse remoteStartResponse;
 
-		//JSON from String to Object
+		// JSON from String to Object
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(Feature.ALLOW_COMMENTS, true);
-		remoteStartResponse = mapper.readValue(jsonInString, RemoteStartResponse.class);
+		remoteStartResponse = mapper.readValue(jsonInString,
+				RemoteStartResponse.class);
 
 		return remoteStartResponse;
-	
+
 	}
 
-	public RemoteStartResponse(){}
-	
-	public RemoteStartResponse(ResponseParamVehicleCommands responseParamVehicleCommands){
-	
-		response=responseParamVehicleCommands;
-	
+	public RemoteStartResponse() {
+	}
+
+	public RemoteStartResponse(
+			ResponseParamVehicleCommands responseParamVehicleCommands) {
+
+		response = responseParamVehicleCommands;
+
 	}
 
 }

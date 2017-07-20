@@ -18,7 +18,8 @@ import es.neodoo.vehicle.tesla.invoker.TeslaInvoker;
 
 public class WakeUpCar {
 
-	private final static Logger log = Logger.getLogger(WakeUpCar.class.getName());
+	private final static Logger log = Logger
+			.getLogger(WakeUpCar.class.getName());
 
 	public static final String URL_WAKE_UP_CAR = "/wake_up";
 
@@ -36,7 +37,8 @@ public class WakeUpCar {
 		this.teslaInvoker = teslaInvoker;
 	}
 
-	public WakeUpCarResponse execute(int vehicleId) throws OauthInvokerException, TeslaInvokerException {
+	public WakeUpCarResponse execute(int vehicleId)
+			throws OauthInvokerException, TeslaInvokerException {
 
 		WakeUpCarResponse wakeUpCarResponse = null;
 
@@ -44,24 +46,33 @@ public class WakeUpCar {
 
 			String accessToken = teslaInvoker.getAccessToken();
 			Client client = Client.create();
-			WebResource webResource = client.resource(teslaInvoker.getUri() + "/" + TeslaInvoker.URL_PATH_VEHICLES + "/" + vehicleId + URL_WAKE_UP_CAR);
+			WebResource webResource = client.resource(
+					teslaInvoker.getUri() + "/" + TeslaInvoker.URL_PATH_VEHICLES
+							+ "/" + vehicleId + URL_WAKE_UP_CAR);
 
-			ClientResponse response = webResource.type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-					.header(OauthInvoker.HEADER_AUTHORIZATION, OauthInvoker.HEADER_AUTHORIZATION_BEARER + " " + accessToken).post(ClientResponse.class, "");
+			ClientResponse response = webResource
+					.type(MediaType.APPLICATION_JSON)
+					.accept(MediaType.APPLICATION_JSON)
+					.header(OauthInvoker.HEADER_AUTHORIZATION,
+							OauthInvoker.HEADER_AUTHORIZATION_BEARER + " "
+									+ accessToken)
+					.post(ClientResponse.class, "");
 
 			String output = response.getEntity(String.class);
-			wakeUpCarResponse =  WakeUpCarResponse.toObject(output);
+			wakeUpCarResponse = WakeUpCarResponse.toObject(output);
 
 		} catch (OauthInvokerException e) {
 			log.log(Level.SEVERE, "Error invoking oauth : " + e.getMessage());
 			throw e;
 		} catch (IOException e) {
-			log.log(Level.SEVERE, "Error invoking Tesla API : " + e.getMessage());
-			throw new TeslaInvokerException("Error invoking wake up car service: " + e.getMessage());
+			log.log(Level.SEVERE,
+					"Error invoking Tesla API : " + e.getMessage());
+			throw new TeslaInvokerException(
+					"Error invoking wake up car service: " + e.getMessage());
 		}
-		
+
 		return wakeUpCarResponse;
-	
+
 	}
 
 }

@@ -13,21 +13,25 @@ public class SetChargeLimitTest {
 
 	@Test
 	public void testParseResponse() {
-	
+
 		try {
-		
-			SetChargeLimitResponse setChargeLimitResponse = new SetChargeLimitResponse(new ResponseParamVehicleCommands(true, ""));
-			String stringSetChargeLimitResponse = setChargeLimitResponse.toJson();
-			SetChargeLimitResponse setChargeLimitResponseConverted = SetChargeLimitResponse.toObject(stringSetChargeLimitResponse);
-			assertEquals(stringSetChargeLimitResponse, setChargeLimitResponseConverted.toJson());
-		
+
+			SetChargeLimitResponse setChargeLimitResponse = new SetChargeLimitResponse(
+					new ResponseParamVehicleCommands(true, ""));
+			String stringSetChargeLimitResponse = setChargeLimitResponse
+					.toJson();
+			SetChargeLimitResponse setChargeLimitResponseConverted = SetChargeLimitResponse
+					.toObject(stringSetChargeLimitResponse);
+			assertEquals(stringSetChargeLimitResponse,
+					setChargeLimitResponseConverted.toJson());
+
 		} catch (Exception e) {
 			assertFalse(true);
-		}	
+		}
 
 	}
 
-	//@Test
+	// @Test
 	public void testSetChargeLimit() {
 
 		String url = "http://localhost:8080/TeslaServer/rest";
@@ -36,18 +40,20 @@ public class SetChargeLimitTest {
 		String clientSecret = "c7257eb71a564034f9419ee651c7d0e5f7aa6bfbd18bafb5c5c033b093bb2fa3";
 		String email = "usuario@gmail.com";
 		String password = "passwordUser123";
-		
+
 		try {
-			
-			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType, clientId, clientSecret, email, password);
+
+			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType,
+					clientId, clientSecret, email, password);
 			SetChargeLimit setChargeLimit = new SetChargeLimit(teslaInvoker);
-			SetChargeLimitResponse setChargeLimitResponse  = setChargeLimit.execute(1,75);
+			SetChargeLimitResponse setChargeLimitResponse = setChargeLimit
+					.execute(1, 75);
 			assertNotNull(setChargeLimitResponse);
-		
+
 		} catch (Exception e) {
 			assertFalse(true);
-		}	
-	
+		}
+
 	}
 
 }

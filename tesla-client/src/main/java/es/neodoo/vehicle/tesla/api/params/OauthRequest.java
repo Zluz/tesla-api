@@ -11,16 +11,15 @@ public class OauthRequest {
 
 	private final static String GRANT_TYPE_PASSWORD = "password";
 
-	private  String grant_type;
+	private String grant_type;
 
 	private String client_id;
 
 	private String client_secret;
 
-	private  String email;
+	private String email;
 
-	private  String password;
-
+	private String password;
 
 	public String getGrant_type() {
 		return grant_type;
@@ -68,19 +67,19 @@ public class OauthRequest {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		//Object to JSON in String
+		// Object to JSON in String
 		jsonInString = mapper.writeValueAsString(this);
-
 
 		return jsonInString;
 
 	}
 
-	public static OauthRequest toObject(String jsonInString) throws JsonParseException, JsonMappingException, IOException {
+	public static OauthRequest toObject(String jsonInString)
+			throws JsonParseException, JsonMappingException, IOException {
 
 		OauthRequest oauthRequest = null;
 
-		//JSON from String to Object
+		// JSON from String to Object
 		ObjectMapper mapper = new ObjectMapper();
 		oauthRequest = mapper.readValue(jsonInString, OauthRequest.class);
 
@@ -88,7 +87,8 @@ public class OauthRequest {
 
 	}
 
-	public OauthRequest(String grant_type, String client_id, String client_secret, String email, String password ){
+	public OauthRequest(String grant_type, String client_id,
+			String client_secret, String email, String password) {
 
 		this.grant_type = grant_type;
 		this.client_id = client_id;
@@ -97,8 +97,9 @@ public class OauthRequest {
 		this.password = password;
 
 	}
-	
-	public OauthRequest( String clientId, String clientSecret, String email, String password ) {
+
+	public OauthRequest(String clientId, String clientSecret, String email,
+			String password) {
 
 		this(GRANT_TYPE_PASSWORD, clientId, clientSecret, email, password);
 

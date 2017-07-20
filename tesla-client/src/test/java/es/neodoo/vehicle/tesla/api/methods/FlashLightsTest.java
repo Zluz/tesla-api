@@ -13,24 +13,25 @@ public class FlashLightsTest {
 
 	@Test
 	public void testParseResponse() {
-		
+
 		try {
-			
-			FlashLightsResponse flashLightsResponse =
-					new FlashLightsResponse(new ResponseParamVehicleCommands(true, ""));
+
+			FlashLightsResponse flashLightsResponse = new FlashLightsResponse(
+					new ResponseParamVehicleCommands(true, ""));
 			String stringFlashLightsResponse = flashLightsResponse.toJson();
-			FlashLightsResponse flashLightsResponseConverted = 
-					FlashLightsResponse.toObject(stringFlashLightsResponse);
-			assertEquals(stringFlashLightsResponse, flashLightsResponseConverted.toJson());
-		
+			FlashLightsResponse flashLightsResponseConverted = FlashLightsResponse
+					.toObject(stringFlashLightsResponse);
+			assertEquals(stringFlashLightsResponse,
+					flashLightsResponseConverted.toJson());
+
 		} catch (Exception e) {
 			assertFalse(true);
-		
+
 		}
 	}
 
-	//@Test
-	public void testFlashLights(){
+	// @Test
+	public void testFlashLights() {
 
 		String url = "http://localhost:8080/TeslaServer/rest";
 		String grantType = "password";
@@ -38,18 +39,19 @@ public class FlashLightsTest {
 		String clientSecret = "c7257eb71a564034f9419ee651c7d0e5f7aa6bfbd18bafb5c5c033b093bb2fa3";
 		String email = "usuario@gmail.com";
 		String password = "passwordUser123";
-		
+
 		try {
-			
-			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType, clientId, clientSecret, email, password);
+
+			TeslaInvoker teslaInvoker = new TeslaInvoker(url, grantType,
+					clientId, clientSecret, email, password);
 			FlashLights flashLights = new FlashLights(teslaInvoker);
-			FlashLightsResponse flashLightsResponse  = flashLights.execute(1);
+			FlashLightsResponse flashLightsResponse = flashLights.execute(1);
 			assertNotNull(flashLightsResponse);
-		
+
 		} catch (Exception e) {
 			assertFalse(true);
-		}	
-	
+		}
+
 	}
 
 }

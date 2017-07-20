@@ -9,23 +9,27 @@ import es.neodoo.vehicle.tesla.api.params.OauthResponse;
 
 public class TeslaInvoker {
 
-	private final static Logger log = Logger.getLogger(OauthInvoker.class.getName());
+	private final static Logger log = Logger
+			.getLogger(OauthInvoker.class.getName());
 
 	private static final String URL_API_RELEASE = "api/1";
 
 	private static final String URL_VEHICLES = "vehicles";
 
-	public static final String URL_PATH_VEHICLES = URL_API_RELEASE + "/" + URL_VEHICLES;
+	public static final String URL_PATH_VEHICLES = URL_API_RELEASE + "/"
+			+ URL_VEHICLES;
 
 	private String uri;
 
 	private OauthInvoker oauthInvoker;
 
-	public TeslaInvoker(String uri, String grantType, String clientId, String clientSecret, String email, String password) {
+	public TeslaInvoker(String uri, String grantType, String clientId,
+			String clientSecret, String email, String password) {
 
 		this.uri = uri;
 		// Oauth invoker initialization
-		oauthInvoker = new OauthInvoker(uri, grantType, clientId, clientSecret, email, password);
+		oauthInvoker = new OauthInvoker(uri, grantType, clientId, clientSecret,
+				email, password);
 
 	}
 
@@ -45,21 +49,22 @@ public class TeslaInvoker {
 		this.oauthInvoker = oauthInvoker;
 	}
 
-	public String getAccessToken() throws OauthInvokerException, TeslaInvokerException {
-		
-		try{
-			
+	public String getAccessToken()
+			throws OauthInvokerException, TeslaInvokerException {
+
+		try {
+
 			OauthResponse oauthResponse = oauthInvoker.callOauthServer();
 			String accessToken = oauthResponse.getAccess_token();
 
 			return accessToken;
-		
-		} catch(OauthInvokerException e){
+
+		} catch (OauthInvokerException e) {
 			log.log(Level.SEVERE, "Error oauth : " + e.getMessage());
 			throw e;
-		
+
 		}
-	
+
 	}
 
 }

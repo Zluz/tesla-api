@@ -34,31 +34,35 @@ public class SetChargeLimitToMaxRangeResponse {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		//Object to JSON in String
+		// Object to JSON in String
 		jsonInString = mapper.writeValueAsString(this);
 
 		return jsonInString;
 
 	}
 
-	public static SetChargeLimitToMaxRangeResponse toObject(String jsonInString) throws JsonParseException, JsonMappingException, IOException {
+	public static SetChargeLimitToMaxRangeResponse toObject(String jsonInString)
+			throws JsonParseException, JsonMappingException, IOException {
 
 		SetChargeLimitToMaxRangeResponse setChargeLimitToMaxRangeResponse;
 
-		//JSON from String to Object
+		// JSON from String to Object
 		ObjectMapper mapper = new ObjectMapper();
-		setChargeLimitToMaxRangeResponse = mapper.readValue(jsonInString, SetChargeLimitToMaxRangeResponse.class);
+		setChargeLimitToMaxRangeResponse = mapper.readValue(jsonInString,
+				SetChargeLimitToMaxRangeResponse.class);
 
 		return setChargeLimitToMaxRangeResponse;
 
 	}
 
-	public SetChargeLimitToMaxRangeResponse(){}
-	
-	public SetChargeLimitToMaxRangeResponse(ResponseParamVehicleCommands responseParamVehicleCommands){
-	
-		response=responseParamVehicleCommands;
-	
+	public SetChargeLimitToMaxRangeResponse() {
+	}
+
+	public SetChargeLimitToMaxRangeResponse(
+			ResponseParamVehicleCommands responseParamVehicleCommands) {
+
+		response = responseParamVehicleCommands;
+
 	}
 
 }

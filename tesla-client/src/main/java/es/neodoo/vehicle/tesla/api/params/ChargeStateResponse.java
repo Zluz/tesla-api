@@ -51,26 +51,29 @@ public class ChargeStateResponse {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		//Object to JSON in String
+		// Object to JSON in String
 		jsonInString = mapper.writeValueAsString(this);
 
 		return jsonInString;
 
 	}
 
-	public static ChargeStateResponse toObject(String jsonInString) throws JsonParseException, JsonMappingException, IOException {
+	public static ChargeStateResponse toObject(String jsonInString)
+			throws JsonParseException, JsonMappingException, IOException {
 
 		ChargeStateResponse cStateReponse;
 
-		//JSON from String to Object
+		// JSON from String to Object
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(Feature.ALLOW_COMMENTS, true);
-		cStateReponse = mapper.readValue(jsonInString, ChargeStateResponse.class);
+		cStateReponse = mapper.readValue(jsonInString,
+				ChargeStateResponse.class);
 
 		return cStateReponse;
-	
+
 	}
 
-	public ChargeStateResponse(){}
+	public ChargeStateResponse() {
+	}
 
 }

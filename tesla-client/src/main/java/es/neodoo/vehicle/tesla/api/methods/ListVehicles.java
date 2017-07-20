@@ -18,7 +18,8 @@ import es.neodoo.vehicle.tesla.invoker.TeslaInvoker;
 
 public class ListVehicles {
 
-	private final static Logger log = Logger.getLogger(ListVehicles.class.getName());
+	private final static Logger log = Logger
+			.getLogger(ListVehicles.class.getName());
 
 	private TeslaInvoker teslaInvoker;
 
@@ -34,7 +35,8 @@ public class ListVehicles {
 		this.teslaInvoker = teslaInvoker;
 	}
 
-	public ListVehiclesResponse execute() throws OauthInvokerException , TeslaInvokerException{
+	public ListVehiclesResponse execute()
+			throws OauthInvokerException, TeslaInvokerException {
 
 		ListVehiclesResponse listVehiclesResponse = new ListVehiclesResponse();
 
@@ -42,10 +44,16 @@ public class ListVehicles {
 
 			String accessToken = teslaInvoker.getAccessToken();
 			Client client = Client.create();
-			WebResource webResource = client.resource(teslaInvoker.getUri() + "/" + TeslaInvoker.URL_PATH_VEHICLES);
+			WebResource webResource = client.resource(teslaInvoker.getUri()
+					+ "/" + TeslaInvoker.URL_PATH_VEHICLES);
 
-			ClientResponse response = webResource.type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-					.header(OauthInvoker.HEADER_AUTHORIZATION, OauthInvoker.HEADER_AUTHORIZATION_BEARER + " " + accessToken).get(ClientResponse.class);
+			ClientResponse response = webResource
+					.type(MediaType.APPLICATION_JSON)
+					.accept(MediaType.APPLICATION_JSON)
+					.header(OauthInvoker.HEADER_AUTHORIZATION,
+							OauthInvoker.HEADER_AUTHORIZATION_BEARER + " "
+									+ accessToken)
+					.get(ClientResponse.class);
 
 			String output = response.getEntity(String.class);
 			listVehiclesResponse = listVehiclesResponse.toObject(output);
@@ -54,12 +62,14 @@ public class ListVehicles {
 			log.log(Level.SEVERE, "Error invoking oauth : " + e.getMessage());
 			throw e;
 		} catch (IOException e) {
-			log.log(Level.SEVERE, "Error invoking Tesla API : " + e.getMessage());
-			throw new TeslaInvokerException("Error invoking list vehicles service: " + e.getMessage());
+			log.log(Level.SEVERE,
+					"Error invoking Tesla API : " + e.getMessage());
+			throw new TeslaInvokerException(
+					"Error invoking list vehicles service: " + e.getMessage());
 		}
-		
+
 		return listVehiclesResponse;
-	
+
 	}
 
 }

@@ -52,17 +52,19 @@ public class GuiSettingsParamResponse {
 		this.gui_range_display = gui_range_display;
 	}
 
-	public GuiSettingsParamResponse(){}
+	public GuiSettingsParamResponse() {
+	}
 
-	public GuiSettingsParamResponse(String gui_distance_units, String gui_temperature_units,
-			String gui_charge_rate_units, Boolean gui_24_hour_time, String gui_range_display) {
-	
+	public GuiSettingsParamResponse(String gui_distance_units,
+			String gui_temperature_units, String gui_charge_rate_units,
+			Boolean gui_24_hour_time, String gui_range_display) {
+
 		this.gui_distance_units = gui_distance_units;
 		this.gui_temperature_units = gui_temperature_units;
 		this.gui_charge_rate_units = gui_charge_rate_units;
 		this.gui_24_hour_time = gui_24_hour_time;
 		this.gui_range_display = gui_range_display;
-	
+
 	}
 
 }
